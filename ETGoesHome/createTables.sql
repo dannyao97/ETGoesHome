@@ -1,10 +1,6 @@
-/**
- * Author:  Daniel
- * Created: Nov 30, 2016
- */
+-- Create table for the projects
 
 CREATE TABLE Location (
-   Id INT,
    State CHAR(2),
    City VARCHAR(50),
    PRIMARY KEY (State, City)
@@ -12,7 +8,6 @@ CREATE TABLE Location (
 
 CREATE TABLE UFOSightings (
    Occurence DATETIME,
-   LocationId INT,
    State CHAR(2),
    City VARCHAR(50),
    Shape VARCHAR(15),
@@ -40,3 +35,4 @@ CREATE TABLE Shootings (
    PRIMARY KEY(Id),
    FOREIGN KEY(State, City) REFERENCES Location(State, City)
 );
+
