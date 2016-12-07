@@ -34,6 +34,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
       labelMain = new javax.swing.JLabel();
       tabPane = new javax.swing.JTabbedPane();
       tab1 = new javax.swing.JPanel();
+      btnGetData = new javax.swing.JButton();
       tab2 = new javax.swing.JPanel();
       txtLogin = new javax.swing.JTextField();
       txtPassword = new javax.swing.JPasswordField();
@@ -47,15 +48,23 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
       labelMain.setText("Main Frame");
 
+      btnGetData.setText("Get Data");
+
       javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
       tab1.setLayout(tab1Layout);
       tab1Layout.setHorizontalGroup(
          tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 602, Short.MAX_VALUE)
+         .addGroup(tab1Layout.createSequentialGroup()
+            .addGap(208, 208, 208)
+            .addComponent(btnGetData)
+            .addContainerGap(319, Short.MAX_VALUE))
       );
       tab1Layout.setVerticalGroup(
          tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 395, Short.MAX_VALUE)
+         .addGroup(tab1Layout.createSequentialGroup()
+            .addGap(22, 22, 22)
+            .addComponent(btnGetData)
+            .addContainerGap(350, Short.MAX_VALUE))
       );
 
       tabPane.addTab("tab1", tab1);
@@ -192,6 +201,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
+   private javax.swing.JButton btnGetData;
    private javax.swing.JButton btnLogin;
    private javax.swing.JLabel labelMain;
    private javax.swing.JLabel lblPw;
