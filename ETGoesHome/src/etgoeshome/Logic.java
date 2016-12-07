@@ -8,12 +8,18 @@ import java.util.Observable;
  */
 public class Logic extends Observable {
 
-   public void notifyGUI() {
-      notifyObservers("Called from Logic"); 
-      
+   protected DBConnector db;
+   
+   public void notifyGUI(Object obj) {
+      setChanged();
+      notifyObservers("Called from Logic");
    }
 
    public Logic() {
-      
+      db = new DBConnector();
+   }
+
+   public boolean login(String user, String pw) {
+      return db.loginToDB(user, pw);
    }
 }

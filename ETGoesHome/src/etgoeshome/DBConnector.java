@@ -1,5 +1,6 @@
 package etgoeshome;
 
+import java.io.IOException;
 import java.sql.*;
 
 /**
@@ -15,7 +16,10 @@ public class DBConnector {
     * Try to connect to the database
     */
    public DBConnector() {
-      
+
+   }
+
+   public boolean loginToDB(String user, String pw) {
       try
       {
          Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -26,10 +30,6 @@ public class DBConnector {
       };
 
       String url = "jdbc:mysql://cslvm74.csc.calpoly.edu/";
-      
-      //ENTER USERNAME AND MYSQL PASSWORD HERE
-      String user = "dsyao";
-      String pw = "";
 
       conn = null;
       try
@@ -42,7 +42,8 @@ public class DBConnector {
       {
          System.out.println("Could not open connection");
          System.out.println(ex);
+         return false;
       }
+      return true;
    }
-
 }
