@@ -25,8 +25,8 @@ public class Logic extends Observable {
       return db.loginToDB(user, pw);
    }
 
-   public void select() {
-      listModel = db.select();
+   public void select(String state) {
+      listModel = db.select(state);
       notifyGUI(ENotify.TAB1);
    }
 }

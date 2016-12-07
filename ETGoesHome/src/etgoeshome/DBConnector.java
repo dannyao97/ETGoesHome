@@ -48,14 +48,14 @@ public class DBConnector {
       return true;
    }
 
-   public DefaultListModel select() {
+   public DefaultListModel select(String dbState) {
       DefaultListModel list = new DefaultListModel();
       try
       {
          Statement state = conn.createStatement();
          ResultSet result = state.executeQuery("SELECT *\n"
                  + "FROM Location\n"
-                 + "WHERE State = 'wa'\n"
+                 + "WHERE State = '" + dbState.toLowerCase() + "'\n"
                  + "ORDER BY City;");
          boolean f = result.next();
          while (f)
