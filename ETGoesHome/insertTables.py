@@ -8,9 +8,42 @@ location = open("shootings.csv")
 location_sql = open("build-Location.sql", "w+")
 location_sql.write("-- Insert statements for Location table\n\n")
 
+location2 = open("ufoSightings.csv")
+location2_sql = open("build-Location2.sql", "w+")
+location2_sql.write("-- Insert statements for Location table\n\n")
+
 shooting = open("shootings.csv")
 shooting_sql = open("build-Shooting.sql", "w+")
 shooting_sql.write("-- Insert statements for Shooting table\n\n")
+
+def date2mysql(oracleDate):
+
+    ## Dictionary of months
+    months = {'1':'01', '2':'02', '3':'03', '4':'04',
+              '5':'05', '6':'06', '7':'07', '8':'08',
+              '9':'09', '10':'10', '11':'11', '12':'12'}
+
+    dateComponents = oracleDate.split('/')  ## decompose the date
+
+    oracleMonth = dateComponents[0].upper()
+    month = months[oracleMonth]  ## convert the month
+  
+    oracleYear = dateComponents[2].strip(" \n\r")
+    year =""
+    if len(oracleYear) == 2:
+        year = '20'+oracleYear              ## convert the year
+                                            ## this is cheating a bit
+                                            ## but all dates in 365 DBs are in 
+                                            ## the 21st century
+    elif len(oracleYear) == 4:                    ## if the year is already four characters
+        year = oracleYear                   ## then keep it intact      
+
+    day = dateComponents[1]                 ## extract day of month
+ 
+    mysqlDate = year+'-'+month+'-'+day      ## form the converted string
+    return(mysqlDate)
+
+
 
 # Create Location insert file
 location.readline()
@@ -20,16 +53,31 @@ for line in location:
    location_sql.write("INSERT INTO Location(State, City) VALUES("\
    + "'" + lineArr[9].lower() + "', '" + lineArr[8].lower() + "');\n")
 
+# Create location2 insert file   
+location2.readline()
+count = 0
+for line in location2:
+   count += 1
+   if count % 10 == 0:
+      lineArr = line.split(",")
+      if str(lineArr[3]) != "us":
+         continue
+      
+      location2_sql.write("INSERT INTO Location(State, City) VALUES("\
+      + "'" + lineArr[2].lower() + "', '" + lineArr[1].lower() + "');\n")
+
 # Create Shooting insert file
 shooting.readline()
 for line in shooting:
    lineArr = line.split(",")
+   if lineArr[7] == "" or lineArr[6] == "":
+      continue
    
    shooting_sql.write("INSERT INTO Shootings(Id, Name, Day, Death, Weapon, Age,"\
    "Gender, Race, City, State, Mental, Threat, Flee, BodyCamera) VALUES("\
    + lineArr[0]
    + ", " + "'" + lineArr[1].lower() + "'"
-   + ", " + lineArr[2]
+   + ", " + "'" + date2mysql(lineArr[2]) + "'"
    + ", " + "'" + lineArr[3].lower() + "'"
    + ", " + "'" + lineArr[4].lower() + "'"
    + ", " + lineArr[5]
@@ -40,7 +88,7 @@ for line in shooting:
    + ", " + "'" + lineArr[10].lower()[:1] + "'" 
    + ", " + "'" + lineArr[11].lower() + "'"
    + ", " + "'" + lineArr[12].lower() + "'" 
-   + ", " + "'" + lineArr[13].lower()[:1] + "'" + ");\n")
+   + ", " + "'" + lineArr[13].upper()[:1] + "'" + ");\n")
 
 
 

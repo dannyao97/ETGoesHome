@@ -52,7 +52,7 @@ for line in ufo:
    if count % 10 == 0:
       lineArr = line.split(",")
       datetime = lineArr[0].split(" ")
-      if len(datetime) != 2:
+      if len(datetime) != 2 or str(lineArr[3]) != "us":
          continue
    
       ufo_sql.write("INSERT INTO UFOSightings(Occurence, State, City, Shape,"\
