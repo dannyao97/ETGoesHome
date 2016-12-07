@@ -2,6 +2,7 @@ package etgoeshome;
 
 import java.io.IOException;
 import java.sql.*;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -46,5 +47,31 @@ public class DBConnector {
       }
       return true;
    }
-   
+
+   public DefaultListModel select() {
+      DefaultListModel list = new DefaultListModel();
+      try
+      {
+         Statement state = conn.createStatement();
+         ResultSet result = state.executeQuery("SELECT *\n"
+                 + "FROM Location\n"
+                 + "WHERE State = 'wa'\n"
+                 + "ORDER BY City;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //City name
+            System.out.println(s1 + "   :   " + s2);
+            list.addElement(s2);
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+      
+      return list;
+   }
 }

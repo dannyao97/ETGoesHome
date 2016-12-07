@@ -1,6 +1,7 @@
 package etgoeshome;
 
 import java.util.Observable;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -9,10 +10,11 @@ import java.util.Observable;
 public class Logic extends Observable {
 
    protected DBConnector db;
-   
+   protected DefaultListModel listModel;
+
    public void notifyGUI(Object obj) {
       setChanged();
-      notifyObservers("Called from Logic");
+      notifyObservers(obj);
    }
 
    public Logic() {
@@ -21,5 +23,10 @@ public class Logic extends Observable {
 
    public boolean login(String user, String pw) {
       return db.loginToDB(user, pw);
+   }
+
+   public void select() {
+      listModel = db.select();
+      notifyGUI(ENotify.TAB1);
    }
 }

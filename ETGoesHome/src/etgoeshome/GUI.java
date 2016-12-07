@@ -35,6 +35,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
       tabPane = new javax.swing.JTabbedPane();
       tab1 = new javax.swing.JPanel();
       btnGetData = new javax.swing.JButton();
+      jScrollPane1 = new javax.swing.JScrollPane();
+      tabList1 = new javax.swing.JList<>();
       tab2 = new javax.swing.JPanel();
       txtLogin = new javax.swing.JTextField();
       txtPassword = new javax.swing.JPasswordField();
@@ -49,22 +51,35 @@ public class GUI extends javax.swing.JFrame implements Observer {
       labelMain.setText("Main Frame");
 
       btnGetData.setText("Get Data");
+      btnGetData.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnGetDataActionPerformed(evt);
+         }
+      });
+
+      jScrollPane1.setViewportView(tabList1);
 
       javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
       tab1.setLayout(tab1Layout);
       tab1Layout.setHorizontalGroup(
          tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(tab1Layout.createSequentialGroup()
-            .addGap(208, 208, 208)
+         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
             .addComponent(btnGetData)
-            .addContainerGap(319, Short.MAX_VALUE))
+            .addGap(107, 107, 107))
       );
       tab1Layout.setVerticalGroup(
          tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(tab1Layout.createSequentialGroup()
-            .addGap(22, 22, 22)
-            .addComponent(btnGetData)
-            .addContainerGap(350, Short.MAX_VALUE))
+            .addGap(24, 24, 24)
+            .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+               .addGroup(tab1Layout.createSequentialGroup()
+                  .addComponent(btnGetData)
+                  .addGap(0, 0, Short.MAX_VALUE)))
+            .addContainerGap())
       );
 
       tabPane.addTab("tab1", tab1);
@@ -149,9 +164,15 @@ public class GUI extends javax.swing.JFrame implements Observer {
       else
       {
          btnLogin.setEnabled(false);
+         txtPassword.setEnabled(false);
+         txtLogin.setEnabled(false);
       }
       txtPassword.setText("");
    }//GEN-LAST:event_btnLoginActionPerformed
+
+   private void btnGetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDataActionPerformed
+      logic.select();
+   }//GEN-LAST:event_btnGetDataActionPerformed
 
    /**
     * @param args the command line arguments
@@ -197,17 +218,30 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
    @Override
    public void update(Observable o, Object arg) {
-      System.out.println(arg.toString());
+      
+      ENotify estate = (ENotify) arg;
+      
+      switch(estate)
+      {
+         case TAB1:
+            tabList1.setModel(logic.listModel);
+            break;
+            
+         case TAB2:
+            break;
+      }
    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnGetData;
    private javax.swing.JButton btnLogin;
+   private javax.swing.JScrollPane jScrollPane1;
    private javax.swing.JLabel labelMain;
    private javax.swing.JLabel lblPw;
    private javax.swing.JLabel lblUser;
    private javax.swing.JPanel tab1;
    private javax.swing.JPanel tab2;
+   private javax.swing.JList<String> tabList1;
    private javax.swing.JTabbedPane tabPane;
    private javax.swing.JTextField txtLogin;
    private javax.swing.JPasswordField txtPassword;
