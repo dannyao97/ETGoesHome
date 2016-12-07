@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import re
 # Populate tables.
 # Daniel Yao - dsyao@calpoly.edu
 
@@ -58,13 +58,25 @@ location2.readline()
 count = 0
 for line in location2:
    count += 1
-   if count % 10 == 0:
+   if count % 9 == 0:
       lineArr = line.split(",")
       if str(lineArr[3]) != "us":
          continue
+      if len(lineArr[1].split(" ")) > 4:
+         continue
+
+      mystring = lineArr[1].lower()
+      result = mystring
+      start = mystring.find( '(' )
+      end = mystring.find( ')' )
+      if start != -1 and end != -1:
+        result = mystring[start+1:end]
+      
+      if result.find('#')!=-1 or result.find('.')!=-1:
+         continue
       
       location2_sql.write("INSERT INTO Location(State, City) VALUES("\
-      + "'" + lineArr[2].lower() + "', '" + lineArr[1].lower() + "');\n")
+      + "'" + lineArr[2].lower() + "', '" + result + "');\n")
 
 # Create Shooting insert file
 shooting.readline()

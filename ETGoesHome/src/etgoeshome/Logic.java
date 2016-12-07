@@ -1,7 +1,8 @@
 package etgoeshome;
 
 import java.util.Observable;
-import javax.swing.DefaultListModel;
+import java.util.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -10,7 +11,7 @@ import javax.swing.DefaultListModel;
 public class Logic extends Observable {
 
    protected DBConnector db;
-   protected DefaultListModel listModel;
+   protected DefaultTableModel tableData;
 
    public void notifyGUI(Object obj) {
       setChanged();
@@ -26,7 +27,7 @@ public class Logic extends Observable {
    }
 
    public void select(String state) {
-      listModel = db.select(state);
+      tableData = db.selectTab1(state);
       notifyGUI(ENotify.TAB1);
    }
 }

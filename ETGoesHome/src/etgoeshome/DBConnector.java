@@ -1,8 +1,8 @@
 package etgoeshome;
 
-import java.io.IOException;
 import java.sql.*;
-import javax.swing.DefaultListModel;
+import java.util.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -48,8 +48,11 @@ public class DBConnector {
       return true;
    }
 
-   public DefaultListModel select(String dbState) {
-      DefaultListModel list = new DefaultListModel();
+   public DefaultTableModel selectTab1(String dbState) {
+      
+      String colNames[] = {"State", "City"};
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+      
       try
       {
          Statement state = conn.createStatement();
@@ -62,8 +65,12 @@ public class DBConnector {
          {
             String s1 = result.getString(1); //State
             String s2 = result.getString(2); //City name
+            
+            Object[] objs = {s1, s2};
+            table.addRow(objs);
+            
             System.out.println(s1 + "   :   " + s2);
-            list.addElement(s2);
+                    
             f = result.next();
          }
 
@@ -72,6 +79,6 @@ public class DBConnector {
          System.out.println(ee);
       }
       
-      return list;
+      return table;
    }
 }

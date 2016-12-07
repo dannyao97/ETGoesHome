@@ -49,7 +49,7 @@ ufo.readline()
 count = 0;
 for line in ufo:
    count += 1
-   if count % 10 == 0:
+   if count % 9 == 0:
       lineArr = line.split(",")
       datetime = lineArr[0].split(" ")
       if len(datetime) != 2 or str(lineArr[3]) != "us":

@@ -1,8 +1,12 @@
 package etgoeshome;
 
+import java.awt.Component;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -31,8 +35,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
       tab1.setEnabled(status);
       btnGetData.setEnabled(status);
       boxStates.setEnabled(status);
-      tabScrollPane1.setEnabled(status);
-      tabList1.setEnabled(status);
+      tab1Table.setEnabled(status);
       
       //tab2 elements
       tab2.setEnabled(status);     
@@ -50,11 +53,20 @@ public class GUI extends javax.swing.JFrame implements Observer {
       labelMain = new javax.swing.JLabel();
       tabPane = new javax.swing.JTabbedPane();
       tab1 = new javax.swing.JPanel();
-      tabScrollPane1 = new javax.swing.JScrollPane();
-      tabList1 = new javax.swing.JList<>();
       boxStates = new javax.swing.JComboBox<>();
       tab1LabelState = new javax.swing.JLabel();
       btnGetData = new javax.swing.JButton();
+      jScrollPane1 = new javax.swing.JScrollPane();
+      tab1Table = new JTable(){
+         @Override
+         public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+            Component component = super.prepareRenderer(renderer, row, column);
+            int rendererWidth = component.getPreferredSize().width;
+            TableColumn tableColumn = getColumnModel().getColumn(column);
+            tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+            return component;
+         }
+      };
       tab2 = new javax.swing.JPanel();
       txtLogin = new javax.swing.JTextField();
       txtPassword = new javax.swing.JPasswordField();
@@ -68,9 +80,6 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
       labelMain.setText("Main Frame");
 
-      tabList1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-      tabScrollPane1.setViewportView(tabList1);
-
       boxStates.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" }));
 
       tab1LabelState.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -83,36 +92,46 @@ public class GUI extends javax.swing.JFrame implements Observer {
          }
       });
 
+      tab1Table.setModel(new javax.swing.table.DefaultTableModel(
+         new Object [][] {
+
+         },
+         new String [] {
+
+         }
+      ));
+      tab1Table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+      jScrollPane1.setViewportView(tab1Table);
+
       javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
       tab1.setLayout(tab1Layout);
       tab1Layout.setHorizontalGroup(
          tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
-            .addGap(20, 20, 20)
-            .addComponent(tabScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-               .addGroup(tab1Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(29, 29, 29)
+            .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
                   .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                   .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-               .addComponent(btnGetData))
-            .addContainerGap(49, Short.MAX_VALUE))
+               .addComponent(btnGetData, javax.swing.GroupLayout.Alignment.TRAILING))
+            .addContainerGap(39, Short.MAX_VALUE))
       );
       tab1Layout.setVerticalGroup(
          tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(tab1Layout.createSequentialGroup()
             .addGap(24, 24, 24)
             .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(tabScrollPane1)
                .addGroup(tab1Layout.createSequentialGroup()
                   .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                      .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                   .addGap(145, 145, 145)
-                  .addComponent(btnGetData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addGap(0, 150, Short.MAX_VALUE)))
-            .addContainerGap())
+                  .addComponent(btnGetData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+               .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addContainerGap(21, Short.MAX_VALUE))
       );
 
       tabPane.addTab("Analyze State", tab1);
@@ -242,7 +261,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
       switch (estate)
       {
          case TAB1:
-            tabList1.setModel(logic.listModel);
+            tab1Table.setModel(logic.tableData);
             break;
 
          case TAB2:
@@ -254,15 +273,15 @@ public class GUI extends javax.swing.JFrame implements Observer {
    private javax.swing.JComboBox<String> boxStates;
    private javax.swing.JButton btnGetData;
    private javax.swing.JButton btnLogin;
+   private javax.swing.JScrollPane jScrollPane1;
    private javax.swing.JLabel labelMain;
    private javax.swing.JLabel lblPw;
    private javax.swing.JLabel lblUser;
    private javax.swing.JPanel tab1;
    private javax.swing.JLabel tab1LabelState;
+   private javax.swing.JTable tab1Table;
    private javax.swing.JPanel tab2;
-   private javax.swing.JList<String> tabList1;
    private javax.swing.JTabbedPane tabPane;
-   private javax.swing.JScrollPane tabScrollPane1;
    private javax.swing.JTextField txtLogin;
    private javax.swing.JPasswordField txtPassword;
    // End of variables declaration//GEN-END:variables
