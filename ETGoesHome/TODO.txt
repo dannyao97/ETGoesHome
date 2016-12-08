@@ -30,8 +30,8 @@ ADD TAB Shooting table stats
 
 
 ADD TAB UFO table stats
-    Number of UFOs of each shape
-    Longest sighting
+DONE(sightingsByShape())    Number of UFOs of each shape
+DONE(longestSighting())    Longest sighting
 DONE(mostSightingsByYear())    Year with most sightings
 DONE(mostSightingsByCity())    City with most sightings
 DONE(sawBrightLight())    List all sightings that describe a "bright light"

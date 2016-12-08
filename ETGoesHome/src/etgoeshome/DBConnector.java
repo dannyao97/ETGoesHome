@@ -278,6 +278,93 @@ public class DBConnector {
       }
    }
    
+   public DefaultTableModel sightingsByShape() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "UFO_Shape", "UFO_Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT Shape, COUNT(*)\n"
+                 + "FROM UFOSightings\n"
+                 + "GROUP BY Shape\n"
+                 + "ORDER BY COUNT(*) DESC;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Shape
+            String s2 = result.getString(2); //Number of sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
+   public DefaultTableModel longestSighting() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "City", "Date_and_Time", "Seconds"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT State, City, Occurence, Duration_Seconds\n"
+                 + "FROM UFOSightings\n"
+                 + "WHERE Duration_Seconds = (SELECT MAX(Duration_Seconds) AS M\n"
+                 + "                          FROM UFOSightings)\n"
+                 + "ORDER BY State;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //City name
+            String s3 = result.getString(3); //Datatime
+            String s4 = result.getString(4); //Seconds
+
+            Object[] objs =
+            {
+               s1, s2, s3, s4
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel mostSightingsByYear() {
 
       /* Column headers */
