@@ -26,5 +26,5 @@ ADD TAB UFO table stats
     Number of UFOs of each shape
     Longest sighting
     Year with most sightings
-    City with most sightings
-    List all sightings that describe a "bright light"
+DONE(mostSightingsByCity())    City with most sightings
+DONE(sawBrightLight())    List all sightings that describe a "bright light"

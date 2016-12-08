@@ -277,4 +277,96 @@ public class DBConnector {
          return false;
       }
    }
+   
+   public DefaultTableModel mostSightingsByCity() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "City", "UFO_Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT DISTINCT u.State, one.City, one.C\n"
+                 + "FROM (SELECT City, COUNT(*) AS C\n"
+                 + "      FROM UFOSightings\n"
+                 + "      GROUP BY City) one,\n"
+                 + "     (SELECT MAX(two.C) AS M\n"
+                 + "      FROM (SELECT City, COUNT(*) AS C\n"
+                 + "            FROM UFOSightings\n"
+                 + "            GROUP BY City) two) max,\n"
+                 + "     UFOSightings u\n"
+                 + "WHERE u.City = one.City AND one.C = max.M\n"
+                 + "ORDER BY u.State, one.City;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //City name
+            String s3 = result.getString(3); //Max number of UFO sightings
+
+            Object[] objs =
+            {
+               s1, s2, s3
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
+   public DefaultTableModel sawBrightLight() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "City", "Description"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT State, City, Description\n"
+                 + "FROM UFOSightings\n"
+                 + "WHERE Description LIKE \"%bright light%\"\n"
+                 + "ORDER BY State;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //City
+            String s3 = result.getString(3); //Description
+
+            Object[] objs =
+            {
+               s1, s2, s3
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
 }
