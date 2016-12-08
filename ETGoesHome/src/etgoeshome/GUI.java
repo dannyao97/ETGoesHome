@@ -1,6 +1,8 @@
 package etgoeshome;
 
 import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JTable;
@@ -25,22 +27,27 @@ public class GUI extends javax.swing.JFrame implements Observer {
       this.logic = logicRef;
       this.logic.addObserver(this);
       this.getRootPane().setDefaultButton(btnLogin);
-      
+      dialogMessage.setLocationRelativeTo(this);
+
       setTabStatus(false);
+      Calendar cal = Calendar.getInstance();
+      SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+      txtShootingDate.setText(format1.format(cal.getTime()));
+
    }
 
    public void setTabStatus(boolean status) {
       tabPane.setEnabled(status);
       //tab1 elements
-      tab1.setEnabled(status);
+      statesTab.setEnabled(status);
       btnGetData.setEnabled(status);
       boxStates.setEnabled(status);
       tab1Table.setEnabled(status);
-      
+
       //tab2 elements
-      tab2.setEnabled(status);     
+      addShooting.setEnabled(status);
    }
-   
+
    /**
     * This method is called from within the constructor to initialize the form.
     * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,9 +57,12 @@ public class GUI extends javax.swing.JFrame implements Observer {
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents() {
 
-      labelMain = new javax.swing.JLabel();
+      dialogMessage = new javax.swing.JDialog();
+      jPanel1 = new javax.swing.JPanel();
+      btnOkDialog = new javax.swing.JButton();
+      lblDialogMessage = new javax.swing.JLabel();
       tabPane = new javax.swing.JTabbedPane();
-      tab1 = new javax.swing.JPanel();
+      statesTab = new javax.swing.JPanel();
       boxStates = new javax.swing.JComboBox<>();
       tab1LabelState = new javax.swing.JLabel();
       btnGetData = new javax.swing.JButton();
@@ -67,18 +77,107 @@ public class GUI extends javax.swing.JFrame implements Observer {
             return component;
          }
       };
-      tab2 = new javax.swing.JPanel();
+      lblAnalyzeStates = new javax.swing.JLabel();
+      addShooting = new javax.swing.JPanel();
+      lblShooting = new javax.swing.JLabel();
+      lblShootingName = new javax.swing.JLabel();
+      lblShootingDate = new javax.swing.JLabel();
+      lblShootingWeapon = new javax.swing.JLabel();
+      lblShootingName3 = new javax.swing.JLabel();
+      lblShootingAge = new javax.swing.JLabel();
+      lblShootingGender = new javax.swing.JLabel();
+      lblShootingRace = new javax.swing.JLabel();
+      lblShootingCity = new javax.swing.JLabel();
+      lblShootingState = new javax.swing.JLabel();
+      lblShootingMental = new javax.swing.JLabel();
+      lblShootingThreat = new javax.swing.JLabel();
+      lblShootingFlee = new javax.swing.JLabel();
+      lblShootingCamera = new javax.swing.JLabel();
+      btnAddShooting = new javax.swing.JButton();
+      txtShootingName = new javax.swing.JTextField();
+      txtShootingDate = new javax.swing.JTextField();
+      txtShootingDeath = new javax.swing.JTextField();
+      lblShootingDeathSupp = new javax.swing.JLabel();
+      txtShootingWeapon = new javax.swing.JTextField();
+      boxShootingGender = new javax.swing.JComboBox<>();
+      boxShootingRace = new javax.swing.JComboBox<>();
+      txtShootingCity = new javax.swing.JTextField();
+      lblShootingCitySupp = new javax.swing.JLabel();
+      txtShootingState = new javax.swing.JTextField();
+      lblShootingStateSupp = new javax.swing.JLabel();
+      boxShootingThreat = new javax.swing.JComboBox<>();
+      boxShootingFlee = new javax.swing.JComboBox<>();
+      boxShootingMental = new javax.swing.JComboBox<>();
+      boxShootingCamera = new javax.swing.JComboBox<>();
+      lblShootingDateSupp = new javax.swing.JLabel();
+      lblShootingNameSupp = new javax.swing.JLabel();
+      spinShooterAge = new javax.swing.JSpinner();
       txtLogin = new javax.swing.JTextField();
       txtPassword = new javax.swing.JPasswordField();
       btnLogin = new javax.swing.JButton();
       lblUser = new javax.swing.JLabel();
       lblPw = new javax.swing.JLabel();
 
+      dialogMessage.setTitle("Message");
+      dialogMessage.setMinimumSize(new java.awt.Dimension(420, 230));
+      dialogMessage.setPreferredSize(new java.awt.Dimension(420, 230));
+
+      btnOkDialog.setText("OK");
+      btnOkDialog.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnOkDialogActionPerformed(evt);
+         }
+      });
+
+      lblDialogMessage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+      lblDialogMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+      lblDialogMessage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+      javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+      jPanel1.setLayout(jPanel1Layout);
+      jPanel1Layout.setHorizontalGroup(
+         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(jPanel1Layout.createSequentialGroup()
+            .addContainerGap(153, Short.MAX_VALUE)
+            .addComponent(btnOkDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(153, 153, 153))
+         .addGroup(jPanel1Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(lblDialogMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
+      );
+      jPanel1Layout.setVerticalGroup(
+         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addContainerGap(60, Short.MAX_VALUE)
+            .addComponent(lblDialogMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(50, 50, 50)
+            .addComponent(btnOkDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+      );
+
+      javax.swing.GroupLayout dialogMessageLayout = new javax.swing.GroupLayout(dialogMessage.getContentPane());
+      dialogMessage.getContentPane().setLayout(dialogMessageLayout);
+      dialogMessageLayout.setHorizontalGroup(
+         dialogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogMessageLayout.createSequentialGroup()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+      );
+      dialogMessageLayout.setVerticalGroup(
+         dialogMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(dialogMessageLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
+      );
+
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       setTitle("ET Goes Home");
       setMinimumSize(new java.awt.Dimension(700, 600));
 
-      labelMain.setText("Main Frame");
+      tabPane.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
       boxStates.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" }));
 
@@ -92,6 +191,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
          }
       });
 
+      tab1Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       tab1Table.setModel(new javax.swing.table.DefaultTableModel(
          new Object [][] {
 
@@ -103,52 +203,300 @@ public class GUI extends javax.swing.JFrame implements Observer {
       tab1Table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
       jScrollPane1.setViewportView(tab1Table);
 
-      javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
-      tab1.setLayout(tab1Layout);
-      tab1Layout.setHorizontalGroup(
-         tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
+      lblAnalyzeStates.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+      lblAnalyzeStates.setText("Analyze States");
+
+      javax.swing.GroupLayout statesTabLayout = new javax.swing.GroupLayout(statesTab);
+      statesTab.setLayout(statesTabLayout);
+      statesTabLayout.setHorizontalGroup(
+         statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(statesTabLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(29, 29, 29)
-            .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab1Layout.createSequentialGroup()
-                  .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                  .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-               .addComponent(btnGetData, javax.swing.GroupLayout.Alignment.TRAILING))
-            .addContainerGap(39, Short.MAX_VALUE))
+            .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(statesTabLayout.createSequentialGroup()
+                  .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(29, 29, 29)
+                  .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statesTabLayout.createSequentialGroup()
+                        .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                     .addComponent(btnGetData, javax.swing.GroupLayout.Alignment.TRAILING)))
+               .addComponent(lblAnalyzeStates))
+            .addContainerGap(87, Short.MAX_VALUE))
       );
-      tab1Layout.setVerticalGroup(
-         tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(tab1Layout.createSequentialGroup()
-            .addGap(24, 24, 24)
-            .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addGroup(tab1Layout.createSequentialGroup()
-                  .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+      statesTabLayout.setVerticalGroup(
+         statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(statesTabLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(lblAnalyzeStates)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(statesTabLayout.createSequentialGroup()
+                  .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                      .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                   .addGap(145, 145, 145)
                   .addComponent(btnGetData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(21, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
 
-      tabPane.addTab("Analyze State", tab1);
+      tabPane.addTab("Analyze States", statesTab);
 
-      javax.swing.GroupLayout tab2Layout = new javax.swing.GroupLayout(tab2);
-      tab2.setLayout(tab2Layout);
-      tab2Layout.setHorizontalGroup(
-         tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 602, Short.MAX_VALUE)
+      lblShooting.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+      lblShooting.setText("Add a New Shooting");
+
+      lblShootingName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingName.setText("Victim Name:");
+
+      lblShootingDate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingDate.setText("Date:");
+
+      lblShootingWeapon.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingWeapon.setText("Manner of Death:");
+
+      lblShootingName3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingName3.setText("Weapon:");
+
+      lblShootingAge.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingAge.setText("Age:");
+
+      lblShootingGender.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingGender.setText("Gender:");
+
+      lblShootingRace.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingRace.setText("Ethnicity:");
+
+      lblShootingCity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingCity.setText("City:");
+
+      lblShootingState.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingState.setText("State:");
+
+      lblShootingMental.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingMental.setText("History of Mental Illness:");
+
+      lblShootingThreat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingThreat.setText("Threat:");
+
+      lblShootingFlee.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingFlee.setText("Fleeing:");
+
+      lblShootingCamera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingCamera.setText("Cop Body Camera:");
+
+      btnAddShooting.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      btnAddShooting.setText("Add Shooting");
+      btnAddShooting.setMargin(new java.awt.Insets(2, 7, 2, 7));
+      btnAddShooting.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnAddShootingActionPerformed(evt);
+         }
+      });
+
+      txtShootingName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      txtShootingName.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            erformed(evt);
+         }
+      });
+
+      txtShootingDate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      txtShootingDeath.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      lblShootingDeathSupp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingDeathSupp.setText("(e.g. shot, tasered, etc.)");
+
+      txtShootingWeapon.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      boxShootingGender.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      boxShootingGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+      boxShootingGender.setSelectedIndex(1);
+
+      boxShootingRace.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      boxShootingRace.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Asian", "Black", "White", "Hispanic", "Other" }));
+      boxShootingRace.setSelectedIndex(2);
+
+      txtShootingCity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      lblShootingCitySupp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingCitySupp.setText("(required)");
+
+      txtShootingState.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      lblShootingStateSupp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingStateSupp.setText("(required)");
+
+      boxShootingThreat.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      boxShootingThreat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Attack", "Other", "Undetermined" }));
+
+      boxShootingFlee.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      boxShootingFlee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Fleeing", "Car", "Foot", "Other" }));
+
+      boxShootingMental.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      boxShootingMental.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "T", "F" }));
+      boxShootingMental.setSelectedIndex(1);
+
+      boxShootingCamera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      boxShootingCamera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "T", "F" }));
+
+      lblShootingDateSupp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingDateSupp.setText("(YYYY-MM-DD)");
+
+      lblShootingNameSupp.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingNameSupp.setText("(required)");
+
+      spinShooterAge.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      spinShooterAge.setModel(new javax.swing.SpinnerNumberModel(21, 1, 130, 1));
+
+      javax.swing.GroupLayout addShootingLayout = new javax.swing.GroupLayout(addShooting);
+      addShooting.setLayout(addShootingLayout);
+      addShootingLayout.setHorizontalGroup(
+         addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(addShootingLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(addShootingLayout.createSequentialGroup()
+                  .addGap(36, 36, 36)
+                  .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                     .addComponent(lblShootingName)
+                     .addComponent(lblShootingWeapon)
+                     .addComponent(lblShootingName3)
+                     .addComponent(lblShootingDate)
+                     .addComponent(lblShootingAge)
+                     .addComponent(lblShootingGender)
+                     .addComponent(lblShootingRace)
+                     .addComponent(lblShootingCity)
+                     .addComponent(lblShootingState)
+                     .addComponent(lblShootingThreat)
+                     .addComponent(lblShootingFlee))
+                  .addGap(18, 18, 18)
+                  .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addShootingLayout.createSequentialGroup()
+                        .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                           .addComponent(txtShootingName, javax.swing.GroupLayout.Alignment.LEADING)
+                           .addGroup(addShootingLayout.createSequentialGroup()
+                              .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                 .addComponent(txtShootingWeapon, javax.swing.GroupLayout.Alignment.LEADING)
+                                 .addComponent(txtShootingDeath))
+                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                              .addComponent(lblShootingDeathSupp)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblShootingNameSupp)
+                        .addGap(77, 77, 77))
+                     .addGroup(addShootingLayout.createSequentialGroup()
+                        .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                           .addGroup(addShootingLayout.createSequentialGroup()
+                              .addComponent(txtShootingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                              .addComponent(lblShootingDateSupp))
+                           .addComponent(boxShootingGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addComponent(boxShootingRace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addGroup(addShootingLayout.createSequentialGroup()
+                              .addComponent(txtShootingCity, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                              .addComponent(lblShootingCitySupp))
+                           .addGroup(addShootingLayout.createSequentialGroup()
+                              .addComponent(txtShootingState, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                              .addComponent(lblShootingStateSupp))
+                           .addComponent(boxShootingThreat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addComponent(boxShootingFlee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addComponent(spinShooterAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(177, Short.MAX_VALUE))))
+               .addGroup(addShootingLayout.createSequentialGroup()
+                  .addComponent(lblShooting)
+                  .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+               .addGroup(addShootingLayout.createSequentialGroup()
+                  .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                     .addComponent(lblShootingCamera)
+                     .addComponent(lblShootingMental))
+                  .addGap(18, 18, 18)
+                  .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addComponent(boxShootingMental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                     .addComponent(boxShootingCamera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGap(0, 0, Short.MAX_VALUE))
+               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addShootingLayout.createSequentialGroup()
+                  .addGap(0, 0, Short.MAX_VALUE)
+                  .addComponent(btnAddShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(20, 20, 20))))
       );
-      tab2Layout.setVerticalGroup(
-         tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 395, Short.MAX_VALUE)
+      addShootingLayout.setVerticalGroup(
+         addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(addShootingLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(lblShooting)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(txtShootingName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblShootingNameSupp))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(txtShootingDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblShootingDateSupp))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(txtShootingDeath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblShootingDeathSupp))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingName3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(txtShootingWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingAge, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(spinShooterAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingGender, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(boxShootingGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingRace, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(boxShootingRace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingCity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(txtShootingCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblShootingCitySupp))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingState, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(txtShootingState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblShootingStateSupp))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingThreat, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(boxShootingThreat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingFlee, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(boxShootingFlee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingMental, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(boxShootingMental, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(addShootingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(lblShootingCamera, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(boxShootingCamera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(btnAddShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(14, Short.MAX_VALUE))
       );
 
-      tabPane.addTab("tab2", tab2);
+      tabPane.addTab("Add Shooting", addShooting);
 
+      txtLogin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      txtPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      btnLogin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       btnLogin.setText("Login");
       btnLogin.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,8 +504,10 @@ public class GUI extends javax.swing.JFrame implements Observer {
          }
       });
 
+      lblUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       lblUser.setText("User:");
 
+      lblPw.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       lblPw.setText("Pass:");
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -165,10 +515,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
       layout.setHorizontalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
-            .addGap(49, 49, 49)
+            .addGap(22, 22, 22)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addComponent(labelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addGroup(layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                      .addGroup(layout.createSequentialGroup()
@@ -180,8 +528,9 @@ public class GUI extends javax.swing.JFrame implements Observer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                   .addGap(18, 18, 18)
-                  .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addContainerGap(44, Short.MAX_VALUE))
+                  .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+               .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addContainerGap(23, Short.MAX_VALUE))
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,11 +544,9 @@ public class GUI extends javax.swing.JFrame implements Observer {
                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addComponent(lblPw))
-            .addGap(11, 11, 11)
-            .addComponent(labelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(64, Short.MAX_VALUE))
+            .addGap(18, 18, 18)
+            .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(18, Short.MAX_VALUE))
       );
 
       pack();
@@ -226,6 +573,68 @@ public class GUI extends javax.swing.JFrame implements Observer {
    private void btnGetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDataActionPerformed
       logic.select(boxStates.getSelectedItem().toString());
    }//GEN-LAST:event_btnGetDataActionPerformed
+
+   private void btnAddShootingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShootingActionPerformed
+      String name = txtShootingName.getText();
+      String date = txtShootingDate.getText();
+      String death = txtShootingDeath.getText();
+      String weapon = txtShootingWeapon.getText();
+      int age = (int) spinShooterAge.getValue();
+      String gender = String.valueOf(boxShootingGender.getSelectedItem());
+      String race = String.valueOf(boxShootingRace.getSelectedItem());
+      String city = txtShootingCity.getText();
+      String state = txtShootingState.getText();
+      String mental = String.valueOf(boxShootingMental.getSelectedItem());
+      String threat = String.valueOf(boxShootingThreat.getSelectedItem());
+      String flee = String.valueOf(boxShootingFlee.getSelectedItem());
+      String camera = String.valueOf(boxShootingCamera.getSelectedItem());
+
+      if (death.equals(""))
+      {
+         death = "null";
+      }
+      if (weapon.equals(""))
+      {
+         weapon = "null";
+      }
+      switch (race)
+      {
+         case "Asian":
+            race = "A";
+            break;
+         case "Black":
+            race = "B";
+            break;
+         case "White":
+            race = "W";
+            break;
+         case "Hispanic":
+            race = "H";
+            break;
+         case "Other":
+            race = "O";
+            break;
+      }
+
+      if (name == null || city == null || state == null
+              || name.equals("") || city.equals("") || state.equals(""))
+      {
+         lblDialogMessage.setText("ERROR: Required fields are missing");
+         dialogMessage.setVisible(true);
+      }
+      else
+      {
+         logic.addShooting(name, date, death, weapon, age, gender, race, city, state, mental, threat, flee, camera);
+      }
+   }//GEN-LAST:event_btnAddShootingActionPerformed
+
+   private void btnOkDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkDialogActionPerformed
+      dialogMessage.dispose();
+   }//GEN-LAST:event_btnOkDialogActionPerformed
+
+   private void erformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_erformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_erformed
 
    /**
     * @param args the command line arguments
@@ -260,29 +669,81 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
       switch (estate)
       {
-         case TAB1:
+         case AN_STATES:
             tab1Table.setModel(logic.tableData);
             break;
 
-         case TAB2:
+         case ADD_SHOOTING:
+            if (logic.success)
+            {
+               lblDialogMessage.setText("<html><b>SUCCESS:</b> A new shooting was added!</html>");
+               logic.success = false;
+               txtShootingName.setText("");
+               txtShootingDeath.setText("");
+               txtShootingWeapon.setText("");
+               txtShootingCity.setText("");
+               txtShootingState.setText("");
+            }
+            else
+            {
+               lblDialogMessage.setText("<html><b>ERROR:</b> Unable to add new shooting</html>");
+            }
+            dialogMessage.setVisible(true);
             break;
       }
    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
+   private javax.swing.JPanel addShooting;
+   private javax.swing.JComboBox<String> boxShootingCamera;
+   private javax.swing.JComboBox<String> boxShootingFlee;
+   private javax.swing.JComboBox<String> boxShootingGender;
+   private javax.swing.JComboBox<String> boxShootingMental;
+   private javax.swing.JComboBox<String> boxShootingRace;
+   private javax.swing.JComboBox<String> boxShootingThreat;
    private javax.swing.JComboBox<String> boxStates;
+   private javax.swing.JButton btnAddShooting;
    private javax.swing.JButton btnGetData;
    private javax.swing.JButton btnLogin;
+   private javax.swing.JButton btnOkDialog;
+   private javax.swing.JDialog dialogMessage;
+   private javax.swing.JPanel jPanel1;
    private javax.swing.JScrollPane jScrollPane1;
-   private javax.swing.JLabel labelMain;
+   private javax.swing.JLabel lblAnalyzeStates;
+   private javax.swing.JLabel lblDialogMessage;
    private javax.swing.JLabel lblPw;
+   private javax.swing.JLabel lblShooting;
+   private javax.swing.JLabel lblShootingAge;
+   private javax.swing.JLabel lblShootingCamera;
+   private javax.swing.JLabel lblShootingCity;
+   private javax.swing.JLabel lblShootingCitySupp;
+   private javax.swing.JLabel lblShootingDate;
+   private javax.swing.JLabel lblShootingDateSupp;
+   private javax.swing.JLabel lblShootingDeathSupp;
+   private javax.swing.JLabel lblShootingFlee;
+   private javax.swing.JLabel lblShootingGender;
+   private javax.swing.JLabel lblShootingMental;
+   private javax.swing.JLabel lblShootingName;
+   private javax.swing.JLabel lblShootingName3;
+   private javax.swing.JLabel lblShootingNameSupp;
+   private javax.swing.JLabel lblShootingRace;
+   private javax.swing.JLabel lblShootingState;
+   private javax.swing.JLabel lblShootingStateSupp;
+   private javax.swing.JLabel lblShootingThreat;
+   private javax.swing.JLabel lblShootingWeapon;
    private javax.swing.JLabel lblUser;
-   private javax.swing.JPanel tab1;
+   private javax.swing.JSpinner spinShooterAge;
+   private javax.swing.JPanel statesTab;
    private javax.swing.JLabel tab1LabelState;
    private javax.swing.JTable tab1Table;
-   private javax.swing.JPanel tab2;
    private javax.swing.JTabbedPane tabPane;
    private javax.swing.JTextField txtLogin;
    private javax.swing.JPasswordField txtPassword;
+   private javax.swing.JTextField txtShootingCity;
+   private javax.swing.JTextField txtShootingDate;
+   private javax.swing.JTextField txtShootingDeath;
+   private javax.swing.JTextField txtShootingName;
+   private javax.swing.JTextField txtShootingState;
+   private javax.swing.JTextField txtShootingWeapon;
    // End of variables declaration//GEN-END:variables
 }

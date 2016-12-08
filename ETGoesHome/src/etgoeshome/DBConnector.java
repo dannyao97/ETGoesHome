@@ -1,7 +1,6 @@
 package etgoeshome;
 
 import java.sql.*;
-import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -49,14 +48,17 @@ public class DBConnector {
    }
 
    public DefaultTableModel selectTab1(String dbState) {
-      
-      String colNames[] = {"State", "City"};
+
+      String colNames[] =
+      {
+         "State", "City"
+      };
       DefaultTableModel table = new DefaultTableModel(colNames, 0);
-      
+
       try
       {
-         Statement state = conn.createStatement();
-         ResultSet result = state.executeQuery("SELECT *\n"
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT *\n"
                  + "FROM Location\n"
                  + "WHERE State = '" + dbState.toLowerCase() + "'\n"
                  + "ORDER BY City;");
@@ -65,12 +67,15 @@ public class DBConnector {
          {
             String s1 = result.getString(1); //State
             String s2 = result.getString(2); //City name
-            
-            Object[] objs = {s1, s2};
+
+            Object[] objs =
+            {
+               s1, s2
+            };
             table.addRow(objs);
-            
+
             System.out.println(s1 + "   :   " + s2);
-                    
+
             f = result.next();
          }
 
@@ -78,7 +83,29 @@ public class DBConnector {
       {
          System.out.println(ee);
       }
-      
+
       return table;
+   }
+
+   public boolean addShooting(String name, String date, String death, String weapon,
+           int age, String gender, String race, String city, String state, String mental,
+           String threat, String flee, String camera) {
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         statement.executeUpdate("INSERT INTO Shootings(Name, Day, \n"
+                 + "Death, Weapon, Age, Gender, Race, City, \n"
+                 + "State, Mental, Threat, Flee, BodyCamera) \n"
+                 + "VALUES('" + name + "', '" + date + "', '" + death + "', '"
+                 + weapon + "', " + age + ", '" + gender +  "', '" + race + "', '" 
+                 + city + "', '" + state + "', '" + mental + "', '" + threat + "', '"
+                 + flee + "', '" + camera + "');");
+         return true;
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+         return false;
+      }
    }
 }

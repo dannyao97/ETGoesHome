@@ -5,5 +5,5 @@ package etgoeshome;
  * @author Daniel
  */
 public enum ENotify {
-   TAB1, TAB2
+   AN_STATES, ADD_SHOOTING
 }
