@@ -87,6 +87,88 @@ public class DBConnector {
 
       return table;
    }
+   
+   public DefaultTableModel shootingsPerState() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "Shootings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT State, COUNT(*)\n"
+                 + "FROM Shootings\n"
+                 + "GROUP BY State\n"
+                 + "ORDER BY State;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //Number of shootings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
+   public DefaultTableModel sightingsPerState() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "UFO_Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT State, COUNT(*)\n"
+                 + "FROM UFOSightings\n"
+                 + "GROUP BY State\n"
+                 + "ORDER BY State;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //Number of sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
 
    public boolean addShooting(String name, String date, String death, String weapon,
            int age, String gender, String race, String city, String state, String mental,
