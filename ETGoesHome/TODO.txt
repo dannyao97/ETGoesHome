@@ -4,7 +4,8 @@ DONE(selectTab1(String))    List every city per state
 DONE(shootingsPerCity(String))    Shootings per city
 DONE(sightingsPerCity(String))    sightings per city
 
-    /* THERE QUERIES LIST DATA FOR ALL STATES */
+
+    /* THESE QUERIES LIST DATA FOR ALL STATES */
 DONE(shootingsPerState())    Number of shootings per state
 DONE(sightingsPerState())    Number of UFO sightings per state
 
@@ -14,13 +15,19 @@ DONE(sightingsPerState())    Number of UFO sightings per state
     Number of UFO sightings per state, Count of men shot in state,
         Count of women shot in state
 
+
+
 ADD TAB for Report UFO sighting
+
+
 
 ADD TAB Shooting table stats
     Shootings per Race
     Shootings per Age group
     Shootings per Weapon
     Number of shootings with and without a BodyCamera
+
+
 
 ADD TAB UFO table stats
     Number of UFOs of each shape
