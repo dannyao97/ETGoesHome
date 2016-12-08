@@ -24,7 +24,7 @@ public class ETGoesHome {
       String url = "jdbc:mysql://cslvm74.csc.calpoly.edu/";
       
       //ENTER USERNAME AND MYSQL PASSWORD HERE
-      String user = "dsyao";
+      String user = "";
       String pw = "";
 
       conn = null;
