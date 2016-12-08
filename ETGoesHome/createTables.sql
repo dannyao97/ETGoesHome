@@ -18,16 +18,16 @@ CREATE TABLE UFOSightings (
 );
 
 CREATE TABLE Shootings (
-   Id INT,
-   Name VARCHAR(50),
-   Day DATE,
+   Id INT AUTO_INCREMENT,
+   Name VARCHAR(50) NOT NULL,
+   Day DATE NOT NULL,
    Death VARCHAR(20),
    Weapon VARCHAR(15),
    Age INT,
-   Gender CHAR(1),
+   Gender CHAR(1) NOT NULL,
    Race CHAR(1),
-   City VARCHAR(50),
-   State CHAR(2),
+   City VARCHAR(50) NOT NULL,
+   State CHAR(2) NOT NULL,
    Mental CHAR(1),
    Threat VARCHAR(15),
    Flee VARCHAR(15),
