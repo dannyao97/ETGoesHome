@@ -131,6 +131,51 @@ public class DBConnector {
       return table;
    }
    
+    public DefaultTableModel shootingsSightingsPerCity(String dbState) {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "City", "Shootings", "Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT State, City, COUNT(*)\n"
+                 + "FROM Shootings S1, UFOSightings S2\n"
+                 + "WHERE S1.State = '" + dbState.toLowerCase() + "'\n"
+                 + "AND S1.State = S2.State AND S1.City = S2.City\n"
+                 + "GROUP BY City"
+                 + "ORDER BY COUNT(*) DESC;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //City name
+            String s3 = result.getString(3); //Number of Shootings
+            String s4 = result.getString(4); //Number of Sightings 
+
+            Object[] objs =
+            {
+               s1, s2, s3, s4
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel sightingsPerCity(String dbState) {
 
       /* Column headers */
