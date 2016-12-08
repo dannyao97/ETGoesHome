@@ -88,6 +88,92 @@ public class DBConnector {
       return table;
    }
    
+   public DefaultTableModel shootingsPerCity(String dbState) {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "City", "Shootings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT State, City, COUNT(*)\n"
+                 + "FROM Shootings\n"
+                 + "WHERE State = '" + dbState.toLowerCase() + "'\n"
+                 + "GROUP BY City"
+                 + "ORDER BY COUNT(*) DESC;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //City name
+            String s3 = result.getString(3); //Number of Shootings
+
+            Object[] objs =
+            {
+               s1, s2, s3
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
+   public DefaultTableModel sightingsPerCity(String dbState) {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "City", "UFO_Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT State, City, COUNT(*)\n"
+                 + "FROM UFOSightings\n"
+                 + "WHERE State = '" + dbState.toLowerCase() + "'\n"
+                 + "GROUP BY City"
+                 + "ORDER BY COUNT(*) DESC;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //City name
+            String s3 = result.getString(3); //Number of UFO sightings
+
+            Object[] objs =
+            {
+               s1, s2, s3
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel shootingsPerState() {
 
       /* Column headers */

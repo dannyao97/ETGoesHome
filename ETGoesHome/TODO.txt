@@ -1,12 +1,12 @@
 Analyze states:
-    /* THERE QUERIES LIST DATA FOR ALL STATES */
-DONE    Number of shootings per state
-DONE    Number of UFO sightings per state
-
     /* THESE QUERIES RELY ON THE USER SELECTING A STATE TO VIEW */
-DONE    List every city per state
-DONE    Shootings per city
-    sightings per city
+DONE(selectTab1(String))    List every city per state
+DONE(shootingsPerCity(String))    Shootings per city
+DONE(sightingsPerCity(String))    sightings per city
+
+    /* THERE QUERIES LIST DATA FOR ALL STATES */
+DONE(shootingsPerState())    Number of shootings per state
+DONE(sightingsPerState())    Number of UFO sightings per state
 
     Find all Instances of shootings in cities where the shooter
         did not have a mental illness and a UFO was sighted.
