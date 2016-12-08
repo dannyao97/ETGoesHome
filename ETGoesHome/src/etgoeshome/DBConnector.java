@@ -49,6 +49,7 @@ public class DBConnector {
 
    public DefaultTableModel selectTab1(String dbState) {
 
+      /* Column headers */
       String colNames[] =
       {
          "State", "City"

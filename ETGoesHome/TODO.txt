@@ -1,0 +1,28 @@
+Analyze states:
+    Number of shootings per state
+    Number of UFO sightings per state
+
+    {List every city per state
+    Shootings per city
+    sightings per city}
+
+    Find all Instances of shootings in cities where the shooter
+        did not have a mental illness and a UFO was sighted.
+
+    Number of UFO sightings per state, Count of men shot in state,
+        Count of women shot in state
+
+ADD TAB for Report UFO sighting
+
+ADD TAB Shooting table stats
+    Shootings per Race
+    Shootings per Age group
+    Shootings per Weapon
+    Number of shootings with and without a BodyCamera
+
+ADD TAB UFO table stats
+    Number of UFOs of each shape
+    Longest sighting
+    Year with most sightings
+    City with most sightings
+    List all sightings that describe a "bright light"
