@@ -278,6 +278,54 @@ public class DBConnector {
       }
    }
    
+   public DefaultTableModel mostSightingsByYear() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "Year", "UFO_Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT DISTINCT one.Y, one.C\n"
+                 + "FROM (SELECT YEAR(Occurence) AS Y, COUNT(*) AS C\n"
+                 + "      FROM UFOSightings\n"
+                 + "      GROUP BY YEAR(Occurence)) one,\n"
+                 + "     (SELECT MAX(two.C) AS M\n"
+                 + "      FROM (SELECT YEAR(Occurence), COUNT(*) AS C\n"
+                 + "            FROM UFOSightings\n"
+                 + "            GROUP BY YEAR(Occurence)) two) max\n"
+                 + "WHERE one.C = max.M\n"
+                 + "ORDER BY one.Y;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Year
+            String s2 = result.getString(2); //Max number of UFO sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel mostSightingsByCity() {
 
       /* Column headers */
