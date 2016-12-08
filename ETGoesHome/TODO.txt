@@ -1,10 +1,12 @@
 Analyze states:
-    Number of shootings per state
-    Number of UFO sightings per state
+    /* THERE QUERIES LIST DATA FOR ALL STATES */
+DONE    Number of shootings per state
+DONE    Number of UFO sightings per state
 
-    {List every city per state
+    /* THESE QUERIES RELY ON THE USER SELECTING A STATE TO VIEW */
+DONE    List every city per state
     Shootings per city
-    sightings per city}
+    sightings per city
 
     Find all Instances of shootings in cities where the shooter
         did not have a mental illness and a UFO was sighted.
