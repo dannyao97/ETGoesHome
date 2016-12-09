@@ -300,6 +300,48 @@ public class DBConnector {
 
       return table;
    }
+   
+   public DefaultTableModel sightings_HealthyShootersPerCity() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "City", "ShootingsANDSightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT L1.City, COUNT(S1.Id)\n"
+                 + "FROM Shootings S1, UFOSightings S2, Location L1\n"
+                 + "WHERE L1.City = S1.City AND L1.State = S1.State AND\n"
+                 + "L1.City = S2.City AND L1.State = S2.State AND S1.Mental = 'F'"
+                 + "GROUP BY L1.City;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //Number of sightings/sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
 
    public boolean addShooting(String name, String date, String death, String weapon,
            int age, String gender, String race, String city, String state, String mental,
