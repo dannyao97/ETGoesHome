@@ -27,7 +27,8 @@ public class Logic extends Observable {
       return db.loginToDB(user, pw);
    }
 
-   public void select(String state, int queryIndex) {
+   /* Handle the various State queries */
+   public void stateSelect(String state, int queryIndex) {
       switch (queryIndex) {
           case 0:
               tableData = db.selectTab1(state);
@@ -42,10 +43,35 @@ public class Logic extends Observable {
               tableData = db.shootingsSightingsPerCity(state);
               break;
           default:
-              System.out.println("Unrecognized State Query\n");
+              System.err.println("Unrecognized State Query\n");
       }
       
       notifyGUI(ENotify.AN_STATES);
+   }
+   
+   /* Handle the various State queries */
+   public void sightingSelect(int queryIndex) {
+      switch (queryIndex) {
+          case 0:
+              tableData = db.sightingsByShape();
+              break;
+          case 1:
+              tableData = db.longestSighting();
+              break;
+          case 2:
+              tableData = db.mostSightingsByYear();
+              break;
+          case 3:
+              tableData = db.mostSightingsByCity();
+              break;
+          case 4:
+              tableData = db.sawBrightLight();
+              break;
+          default:
+              System.err.println("Unrecognized Sighting Query\n");
+      }
+      
+      notifyGUI(ENotify.AN_SIGHTINGS);
    }
    
    public void addShooting(String name, String date, String death, String weapon,

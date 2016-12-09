@@ -42,10 +42,19 @@ public class GUI extends javax.swing.JFrame implements Observer {
       statesTab.setEnabled(status);
       btnGetData.setEnabled(status);
       boxStates.setEnabled(status);
-      tab1Table.setEnabled(status);
+      tabStatesTable.setEnabled(status);
+      boxStateQuerySelect.setEnabled(status);
+      lblStateQuery.setEnabled(status);
 
       //tab2 elements
       addShooting.setEnabled(status);
+      
+      //tab3 elements
+      sightingsTab.setEnabled(status);
+      btnGetSightingData.setEnabled(status);
+      tabSightingsTable.setEnabled(status);
+      boxSightingQuerySelect.setEnabled(status);
+      lblSightingQuery.setEnabled(status);
    }
 
    /**
@@ -67,7 +76,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
         tab1LabelState = new javax.swing.JLabel();
         btnGetData = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tab1Table = new JTable(){
+        tabStatesTable = new JTable(){
             @Override
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component component = super.prepareRenderer(renderer, row, column);
@@ -78,8 +87,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
             }
         };
         lblAnalyzeStates = new javax.swing.JLabel();
-        boxQuerySelect = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
+        boxStateQuerySelect = new javax.swing.JComboBox();
+        lblStateQuery = new javax.swing.JLabel();
         addShooting = new javax.swing.JPanel();
         lblShooting = new javax.swing.JLabel();
         lblShootingName = new javax.swing.JLabel();
@@ -114,6 +123,22 @@ public class GUI extends javax.swing.JFrame implements Observer {
         lblShootingDateSupp = new javax.swing.JLabel();
         lblShootingNameSupp = new javax.swing.JLabel();
         spinShooterAge = new javax.swing.JSpinner();
+        sightingsTab = new javax.swing.JPanel();
+        btnGetSightingData = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabSightingsTable = new JTable(){
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
+        lblSightings = new javax.swing.JLabel();
+        boxSightingQuerySelect = new javax.swing.JComboBox();
+        lblSightingQuery = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
@@ -192,8 +217,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
             }
         });
 
-        tab1Table.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tab1Table.setModel(new javax.swing.table.DefaultTableModel(
+        tabStatesTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tabStatesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -201,20 +226,20 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
             }
         ));
-        tab1Table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        jScrollPane1.setViewportView(tab1Table);
+        tabStatesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        jScrollPane1.setViewportView(tabStatesTable);
 
         lblAnalyzeStates.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblAnalyzeStates.setText("Analyze States");
 
-        boxQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Cities", "Shootings Per City", "UFO Sightings Per City", "Shootings and Sightings Per City" }));
-        boxQuerySelect.addActionListener(new java.awt.event.ActionListener() {
+        boxStateQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Cities", "Shootings Per City", "UFO Sightings Per City", "Shootings and Sightings Per City" }));
+        boxStateQuerySelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxQuerySelectActionPerformed(evt);
+                boxStateQuerySelectActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Select a Query");
+        lblStateQuery.setText("Select a Query");
 
         javax.swing.GroupLayout statesTabLayout = new javax.swing.GroupLayout(statesTab);
         statesTab.setLayout(statesTabLayout);
@@ -232,8 +257,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnGetData, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(boxQuerySelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(boxStateQuerySelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblStateQuery, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(lblAnalyzeStates))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
@@ -249,9 +274,9 @@ public class GUI extends javax.swing.JFrame implements Observer {
                             .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblStateQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(boxQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(boxStateQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(btnGetData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -508,6 +533,77 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
         tabPane.addTab("Add Shooting", addShooting);
 
+        btnGetSightingData.setText("Get Data");
+        btnGetSightingData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetSightingDataActionPerformed(evt);
+            }
+        });
+
+        tabSightingsTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tabSightingsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tabSightingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(tabSightingsTable);
+
+        lblSightings.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblSightings.setText("UFO Sightings");
+
+        boxSightingQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UFOs by Shape", "Longest Sighting", "Year with most Sightings", "City with most Sightings", "Described a Bright Light" }));
+        boxSightingQuerySelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxSightingQuerySelectActionPerformed(evt);
+            }
+        });
+
+        lblSightingQuery.setText("Select a Query");
+
+        javax.swing.GroupLayout sightingsTabLayout = new javax.swing.GroupLayout(sightingsTab);
+        sightingsTab.setLayout(sightingsTabLayout);
+        sightingsTabLayout.setHorizontalGroup(
+            sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sightingsTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sightingsTabLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(sightingsTabLayout.createSequentialGroup()
+                                .addGap(162, 162, 162)
+                                .addComponent(btnGetSightingData))
+                            .addGroup(sightingsTabLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(boxSightingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSightingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(lblSightings))
+                .addContainerGap(87, Short.MAX_VALUE))
+        );
+        sightingsTabLayout.setVerticalGroup(
+            sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sightingsTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblSightings)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sightingsTabLayout.createSequentialGroup()
+                        .addComponent(lblSightingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boxSightingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(btnGetSightingData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+
+        tabPane.addTab("UFO Sightings", sightingsTab);
+
         txtLogin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -587,8 +683,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
    }//GEN-LAST:event_btnLoginActionPerformed
 
    private void btnGetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDataActionPerformed
-      logic.select(boxStates.getSelectedItem().toString(),
-                   boxQuerySelect.getSelectedIndex());
+      logic.stateSelect(boxStates.getSelectedItem().toString(),
+                   boxStateQuerySelect.getSelectedIndex());
    }//GEN-LAST:event_btnGetDataActionPerformed
 
    private void btnAddShootingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShootingActionPerformed
@@ -653,9 +749,17 @@ public class GUI extends javax.swing.JFrame implements Observer {
       // TODO add your handling code here:
    }//GEN-LAST:event_erformed
 
-    private void boxQuerySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxQuerySelectActionPerformed
+    private void boxStateQuerySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxStateQuerySelectActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_boxQuerySelectActionPerformed
+    }//GEN-LAST:event_boxStateQuerySelectActionPerformed
+
+    private void btnGetSightingDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetSightingDataActionPerformed
+        logic.sightingSelect(boxSightingQuerySelect.getSelectedIndex());
+    }//GEN-LAST:event_btnGetSightingDataActionPerformed
+
+    private void boxSightingQuerySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSightingQuerySelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSightingQuerySelectActionPerformed
 
    /**
     * @param args the command line arguments
@@ -691,7 +795,11 @@ public class GUI extends javax.swing.JFrame implements Observer {
       switch (estate)
       {
          case AN_STATES:
-            tab1Table.setModel(logic.tableData);
+            tabStatesTable.setModel(logic.tableData);
+            break;
+             
+         case AN_SIGHTINGS:
+            tabSightingsTable.setModel(logic.tableData);
             break;
 
          case ADD_SHOOTING:
@@ -716,22 +824,24 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addShooting;
-    private javax.swing.JComboBox boxQuerySelect;
     private javax.swing.JComboBox<String> boxShootingCamera;
     private javax.swing.JComboBox<String> boxShootingFlee;
     private javax.swing.JComboBox<String> boxShootingGender;
     private javax.swing.JComboBox<String> boxShootingMental;
     private javax.swing.JComboBox<String> boxShootingRace;
     private javax.swing.JComboBox<String> boxShootingThreat;
+    private javax.swing.JComboBox boxSightingQuerySelect;
+    private javax.swing.JComboBox boxStateQuerySelect;
     private javax.swing.JComboBox<String> boxStates;
     private javax.swing.JButton btnAddShooting;
     private javax.swing.JButton btnGetData;
+    private javax.swing.JButton btnGetSightingData;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnOkDialog;
     private javax.swing.JDialog dialogMessage;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAnalyzeStates;
     private javax.swing.JLabel lblDialogMessage;
     private javax.swing.JLabel lblPw;
@@ -754,12 +864,17 @@ public class GUI extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel lblShootingStateSupp;
     private javax.swing.JLabel lblShootingThreat;
     private javax.swing.JLabel lblShootingWeapon;
+    private javax.swing.JLabel lblSightingQuery;
+    private javax.swing.JLabel lblSightings;
+    private javax.swing.JLabel lblStateQuery;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JPanel sightingsTab;
     private javax.swing.JSpinner spinShooterAge;
     private javax.swing.JPanel statesTab;
     private javax.swing.JLabel tab1LabelState;
-    private javax.swing.JTable tab1Table;
     private javax.swing.JTabbedPane tabPane;
+    private javax.swing.JTable tabSightingsTable;
+    private javax.swing.JTable tabStatesTable;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtShootingCity;
