@@ -10,7 +10,7 @@ DONE(shootingsSightingsPerCity(String))    Shootings and Sightings per city
 DONE(shootingsPerState())    Number of shootings per state
 DONE(sightingsPerState())    Number of UFO sightings per state
 
-    Find all Instances of shootings in cities where the shooter
+DONE(sightings_HealthyShootersPerCity())    Find all Instances of shootings in cities where the shooter
         did not have a mental illness and a UFO was sighted.
 
     Number of UFO sightings per state, Count of men shot in state,
