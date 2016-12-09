@@ -87,7 +87,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel shootingsPerCity(String dbState) {
 
       /* Column headers */
@@ -130,8 +130,8 @@ public class DBConnector {
 
       return table;
    }
-   
-    public DefaultTableModel shootingsSightingsPerCity(String dbState) {
+
+   public DefaultTableModel shootingsSightingsPerCity(String dbState) {
 
       /* Column headers */
       String colNames[] =
@@ -144,7 +144,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT one.State, one.City, one.O, two.I\n"
+                 "SELECT one.State, one.City, one.O, two.I\n"
                  + "FROM (SELECT State, City, COUNT(*) AS O\n"
                  + "      FROM Shootings\n"
                  + "      WHERE State = '" + dbState.toLowerCase() + "'\n"
@@ -181,7 +181,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel sightingsPerCity(String dbState) {
 
       /* Column headers */
@@ -224,7 +224,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel shootingsPerState() {
 
       /* Column headers */
@@ -265,7 +265,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel sightingsPerState() {
 
       /* Column headers */
@@ -306,7 +306,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel sightings_HealthyShootersPerCity() {
 
       /* Column headers */
@@ -348,7 +348,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel sightings_MenAndWomenShootingsPerState() {
 
       /* Column headers */
@@ -409,7 +409,7 @@ public class DBConnector {
                  + "Death, Weapon, Age, Gender, Race, City, \n"
                  + "State, Mental, Threat, Flee, BodyCamera) \n"
                  + "VALUES('" + name + "', '" + date + "', '" + death + "', '"
-                 + weapon + "', " + age + ", '" + gender +  "', '" + race + "', '" 
+                 + weapon + "', " + age + ", '" + gender + "', '" + race + "', '"
                  + city + "', '" + state + "', '" + mental + "', '" + threat + "', '"
                  + flee + "', '" + camera + "');");
          return true;
@@ -419,16 +419,16 @@ public class DBConnector {
          return false;
       }
    }
-   
-   public boolean addSighting(String occurence, String state, String city,
-                              String shape, int seconds, String description) {
 
+   public boolean addSighting(String occur, String city, String state, String shape,
+           int duration, String descript) {
       try
       {
          Statement statement = conn.createStatement();
-         statement.executeUpdate("INSERT INTO Shootings "
-                 + "VALUES('" + occurence + "', '" + state + "', '" + city + "', '"
-                 + shape + "', " + seconds + ", '" + description + "');");
+         statement.executeUpdate("INSERT INTO UFOSightings(Occurence, State, \n"
+                 + "City, Shape, Duration_Seconds, Description) "
+                 + "VALUES('" + occur + "', '" + state + "', '" + city + "', '"
+                 + shape + "', " + duration + ", '" + descript + "');");
          return true;
       } catch (Exception ee)
       {
@@ -436,7 +436,7 @@ public class DBConnector {
          return false;
       }
    }
-   
+
    public DefaultTableModel shootingsByRace() {
 
       /* Column headers */
@@ -450,7 +450,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT Race, COUNT(*)\n"
+                 "SELECT Race, COUNT(*)\n"
                  + "FROM Shootings\n"
                  + "GROUP BY Race\n"
                  + "ORDER BY COUNT(*) DESC;");
@@ -478,7 +478,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel shootingsByGender() {
 
       /* Column headers */
@@ -492,7 +492,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT Gender, COUNT(*)\n"
+                 "SELECT Gender, COUNT(*)\n"
                  + "FROM Shootings\n"
                  + "GROUP BY Gender;");
          boolean f = result.next();
@@ -519,7 +519,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel shootingsByDay() {
 
       /* Column headers */
@@ -533,7 +533,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT DAYNAME(Day), COUNT(*)\n"
+                 "SELECT DAYNAME(Day), COUNT(*)\n"
                  + "FROM Shootings\n"
                  + "GROUP BY DAYNAME(Day)\n"
                  + "ORDER BY DAYOFWEEK(Day);");
@@ -561,7 +561,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel shootingsByWeapon() {
 
       /* Column headers */
@@ -575,7 +575,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT Weapon, COUNT(*)\n"
+                 "SELECT Weapon, COUNT(*)\n"
                  + "FROM Shootings\n"
                  + "GROUP BY Weapon\n"
                  + "ORDER BY COUNT(*) DESC;");
@@ -603,7 +603,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel shootingsByCamera() {
 
       /* Column headers */
@@ -617,7 +617,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT w.T, n.F\n"
+                 "SELECT w.T, n.F\n"
                  + "FROM (SELECT COUNT(*) AS T\n"
                  + "      FROM Shootings\n"
                  + "      WHERE BodyCamera = 'T') w,\n"
@@ -648,7 +648,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel sightingsByShape() {
 
       /* Column headers */
@@ -662,7 +662,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT Shape, COUNT(*)\n"
+                 "SELECT Shape, COUNT(*)\n"
                  + "FROM UFOSightings\n"
                  + "GROUP BY Shape\n"
                  + "ORDER BY COUNT(*) DESC;");
@@ -690,7 +690,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel longestSighting() {
 
       /* Column headers */
@@ -704,7 +704,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT State, City, Occurence, Duration_Seconds\n"
+                 "SELECT State, City, Occurence, Duration_Seconds\n"
                  + "FROM UFOSightings\n"
                  + "WHERE Duration_Seconds = (SELECT MAX(Duration_Seconds) AS M\n"
                  + "                          FROM UFOSightings)\n"
@@ -735,7 +735,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel mostSightingsByYear() {
 
       /* Column headers */
@@ -749,7 +749,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT DISTINCT one.Y, one.C\n"
+                 "SELECT DISTINCT one.Y, one.C\n"
                  + "FROM (SELECT YEAR(Occurence) AS Y, COUNT(*) AS C\n"
                  + "      FROM UFOSightings\n"
                  + "      GROUP BY YEAR(Occurence)) one,\n"
@@ -783,7 +783,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel mostSightingsByCity() {
 
       /* Column headers */
@@ -797,7 +797,7 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery(
-                   "SELECT DISTINCT u.State, one.City, one.C\n"
+                 "SELECT DISTINCT u.State, one.City, one.C\n"
                  + "FROM (SELECT City, COUNT(*) AS C\n"
                  + "      FROM UFOSightings\n"
                  + "      GROUP BY City) one,\n"
@@ -833,7 +833,7 @@ public class DBConnector {
 
       return table;
    }
-   
+
    public DefaultTableModel sawBrightLight() {
 
       /* Column headers */
