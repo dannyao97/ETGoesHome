@@ -312,7 +312,7 @@ public class DBConnector {
       /* Column headers */
       String colNames[] =
       {
-         "City", "ShootingsANDSightings"
+         "City", "Shootings with a Sighting"
       };
       DefaultTableModel table = new DefaultTableModel(colNames, 0);
 

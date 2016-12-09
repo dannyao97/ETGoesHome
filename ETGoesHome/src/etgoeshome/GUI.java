@@ -283,7 +283,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblAnalyzeStates.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
       lblAnalyzeStates.setText("Analyze UFOs and Shootings");
 
-      boxStateQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Cities", "Shootings per City", "UFO Sightings per City", "Sightings and Shootings per City", "Sightings and Shootings by Gender per State", "Sightings and Shootings without Mental per City" }));
+      boxStateQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Cities", "Shootings per City", "UFO Sightings per City", "Sightings and Shootings per City", "Sightings and Shootings by Gender per State", "Shootings without Mental with Sighting per City" }));
       boxStateQuerySelect.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
             boxStateQuerySelectActionPerformed(evt);

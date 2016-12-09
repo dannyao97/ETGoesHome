@@ -369,7 +369,7 @@
                     <StringItem index="2" value="UFO Sightings per City"/>
                     <StringItem index="3" value="Sightings and Shootings per City"/>
                     <StringItem index="4" value="Sightings and Shootings by Gender per State"/>
-                    <StringItem index="5" value="Sightings and Shootings without Mental per City"/>
+                    <StringItem index="5" value="Shootings without Mental with Sighting per City"/>
                   </StringArray>
                 </Property>
               </Properties>
