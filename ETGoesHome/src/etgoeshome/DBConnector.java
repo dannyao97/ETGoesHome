@@ -323,6 +323,48 @@ public class DBConnector {
       }
    }
    
+   public DefaultTableModel shootingsByDay() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "Day", "Shootings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT DAYNAME(Day), COUNT(*)\n"
+                 + "FROM Shootings\n"
+                 + "GROUP BY DAYNAME(Day)\n"
+                 + "ORDER BY DAYOFWEEK(Day);");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Day of week
+            String s2 = result.getString(2); //Number of shootings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel shootingsByWeapon() {
 
       /* Column headers */
