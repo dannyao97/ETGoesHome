@@ -25,7 +25,7 @@ ADD TAB for Report UFO sighting
 ADD TAB Shooting table stats
     Shootings per Race
     Shootings per Age group
-    Shootings per Weapon
+DONE(shootingsByWeapon())    Shootings per Weapon
 DONE(shootingsByCamera())    Number of shootings with and without a BodyCamera
 
 

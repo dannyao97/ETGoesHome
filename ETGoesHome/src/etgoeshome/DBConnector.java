@@ -323,6 +323,48 @@ public class DBConnector {
       }
    }
    
+   public DefaultTableModel shootingsByWeapon() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "Weapon", "Shootings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT Weapon, COUNT(*)\n"
+                 + "FROM Shootings\n"
+                 + "GROUP BY Weapon\n"
+                 + "ORDER BY COUNT(*) DESC;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Weapon
+            String s2 = result.getString(2); //Number of shootings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel shootingsByCamera() {
 
       /* Column headers */
@@ -346,8 +388,8 @@ public class DBConnector {
          boolean f = result.next();
          while (f)
          {
-            String s1 = result.getString(1); //Shape
-            String s2 = result.getString(2); //Number of sightings
+            String s1 = result.getString(1); //Number of shootings with camera
+            String s2 = result.getString(2); //Number of shootings without camera
 
             Object[] objs =
             {
