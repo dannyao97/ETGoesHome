@@ -23,7 +23,7 @@ DONE(addSighting(...))    Method for reporting sighting
 
 
 
-ADD TAB Shooting table stats
+DONE ADD TAB Shooting table stats
 DONE(shootingsByRace())    Shootings per Race
 DONE(shootingsByGender())    Shootings by Gender
 DONE(shootingsByDay())    Shootings per day of week
@@ -32,7 +32,7 @@ DONE(shootingsByCamera())    Number of shootings with and without a BodyCamera
 
 
 
-ADD TAB UFO table stats
+DONE ADD TAB UFO table stats
 DONE(sightingsByShape())    Number of UFOs of each shape
 DONE(longestSighting())    Longest sighting
 DONE(mostSightingsByYear())    Year with most sightings

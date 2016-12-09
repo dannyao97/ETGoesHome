@@ -49,7 +49,7 @@ public class Logic extends Observable {
       notifyGUI(ENotify.AN_STATES);
    }
    
-   /* Handle the various State queries */
+   /* Handle the various UFO Sighting queries */
    public void sightingSelect(int queryIndex) {
       switch (queryIndex) {
           case 0:
@@ -72,6 +72,31 @@ public class Logic extends Observable {
       }
       
       notifyGUI(ENotify.AN_SIGHTINGS);
+   }
+   
+   /* Handle the various Police Shooting queries */
+   public void shootingSelect(int queryIndex) {
+      switch (queryIndex) {
+          case 0:
+              tableData = db.shootingsByRace();
+              break;
+          case 1:
+              tableData = db.shootingsByGender();
+              break;
+          case 2:
+              tableData = db.shootingsByDay();
+              break;
+          case 3:
+              tableData = db.shootingsByWeapon();
+              break;
+          case 4:
+              tableData = db.shootingsByCamera();
+              break;
+          default:
+              System.err.println("Unrecognized Shooting Query\n");
+      }
+      
+      notifyGUI(ENotify.AN_SHOOTINGS);
    }
    
    public void addShooting(String name, String date, String death, String weapon,
