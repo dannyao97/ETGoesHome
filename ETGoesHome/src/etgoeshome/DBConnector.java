@@ -323,6 +323,23 @@ public class DBConnector {
       }
    }
    
+   public boolean addSighting(String occurence, String state, String city,
+                              String shape, int seconds, String description) {
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         statement.executeUpdate("INSERT INTO Shootings "
+                 + "VALUES('" + occurence + "', '" + state + "', '" + city + "', '"
+                 + shape + "', " + seconds + ", '" + description + "');");
+         return true;
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+         return false;
+      }
+   }
+   
    public DefaultTableModel shootingsByRace() {
 
       /* Column headers */

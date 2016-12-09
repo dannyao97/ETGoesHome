@@ -19,6 +19,7 @@ DONE(sightingsPerState())    Number of UFO sightings per state
 
 
 ADD TAB for Report UFO sighting
+DONE(addSighting(...))    Method for reporting sighting
 
 
 
