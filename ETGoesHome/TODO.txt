@@ -3,7 +3,7 @@ Analyze states:
 DONE(selectTab1(String))    List every city per state
 DONE(shootingsPerCity(String))    Shootings per city
 DONE(sightingsPerCity(String))    sightings per city
-    Shootings and Sightings per city
+DONE(shootingsSightingsPerCity(String))    Shootings and Sightings per city
 
 
     /* THESE QUERIES LIST DATA FOR ALL STATES */
