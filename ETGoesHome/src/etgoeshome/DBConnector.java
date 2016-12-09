@@ -143,12 +143,18 @@ public class DBConnector {
       try
       {
          Statement statement = conn.createStatement();
-         ResultSet result = statement.executeQuery("SELECT State, City, COUNT(*)\n"
-                 + "FROM Shootings S1, UFOSightings S2\n"
-                 + "WHERE S1.State = '" + dbState.toLowerCase() + "'\n"
-                 + "AND S1.State = S2.State AND S1.City = S2.City\n"
-                 + "GROUP BY City"
-                 + "ORDER BY COUNT(*) DESC;");
+         ResultSet result = statement.executeQuery(
+                   "SELECT one.State, one.City, one.O, two.I\n"
+                 + "FROM (SELECT State, City, COUNT(*) AS O\n"
+                 + "      FROM Shootings\n"
+                 + "      WHERE State = '" + dbState.toLowerCase() + "'\n"
+                 + "      GROUP BY City) one,\n"
+                 + "     (SELECT State, City, COUNT(*) AS I\n"
+                 + "      FROM UFOSightings\n"
+                 + "      WHERE State = '" + dbState.toLowerCase() + "'\n"
+                 + "      GROUP BY City) two\n"
+                 + "WHERE one.State = two.State AND one.City = two.City\n"
+                 + "ORDER BY one.O DESC, two.I DESC;");
          boolean f = result.next();
          while (f)
          {

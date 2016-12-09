@@ -38,6 +38,9 @@ public class Logic extends Observable {
           case 2:
               tableData = db.sightingsPerCity(state);
               break;
+          case 3:
+              tableData = db.shootingsSightingsPerCity(state);
+              break;
           default:
               System.out.println("Unrecognized State Query\n");
       }

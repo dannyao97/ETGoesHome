@@ -340,10 +340,11 @@
             <Component class="javax.swing.JComboBox" name="boxQuerySelect">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
+                  <StringArray count="4">
                     <StringItem index="0" value="All Cities"/>
                     <StringItem index="1" value="Shootings Per City"/>
                     <StringItem index="2" value="UFO Sightings Per City"/>
+                    <StringItem index="3" value="Shootings and Sightings Per City"/>
                   </StringArray>
                 </Property>
               </Properties>
