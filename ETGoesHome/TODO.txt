@@ -23,7 +23,8 @@ ADD TAB for Report UFO sighting
 
 
 ADD TAB Shooting table stats
-    Shootings per Race
+DONE(shootingsByRace())    Shootings per Race
+DONE(shootingsByGender())    Shootings by Gender
 DONE(shootingsByDay())    Shootings per day of week
 DONE(shootingsByWeapon())    Shootings per Weapon
 DONE(shootingsByCamera())    Number of shootings with and without a BodyCamera

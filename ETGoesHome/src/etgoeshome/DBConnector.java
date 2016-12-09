@@ -323,6 +323,89 @@ public class DBConnector {
       }
    }
    
+   public DefaultTableModel shootingsByRace() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "Race", "Shootings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT Race, COUNT(*)\n"
+                 + "FROM Shootings\n"
+                 + "GROUP BY Race\n"
+                 + "ORDER BY COUNT(*) DESC;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Race
+            String s2 = result.getString(2); //Number of shootings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
+   public DefaultTableModel shootingsByGender() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "Gender", "Shootings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT Gender, COUNT(*)\n"
+                 + "FROM Shootings\n"
+                 + "GROUP BY Gender;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Sex
+            String s2 = result.getString(2); //Number of shootings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel shootingsByDay() {
 
       /* Column headers */
