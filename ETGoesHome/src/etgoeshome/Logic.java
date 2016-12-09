@@ -27,8 +27,21 @@ public class Logic extends Observable {
       return db.loginToDB(user, pw);
    }
 
-   public void select(String state) {
-      tableData = db.selectTab1(state);
+   public void select(String state, int queryIndex) {
+      switch (queryIndex) {
+          case 0:
+              tableData = db.selectTab1(state);
+              break;
+          case 1:
+              tableData = db.shootingsPerCity(state);
+              break;
+          case 2:
+              tableData = db.sightingsPerCity(state);
+              break;
+          default:
+              System.out.println("Unrecognized State Query\n");
+      }
+      
       notifyGUI(ENotify.AN_STATES);
    }
    

@@ -103,7 +103,7 @@ public class DBConnector {
          ResultSet result = statement.executeQuery("SELECT State, City, COUNT(*)\n"
                  + "FROM Shootings\n"
                  + "WHERE State = '" + dbState.toLowerCase() + "'\n"
-                 + "GROUP BY City"
+                 + "GROUP BY City\n"
                  + "ORDER BY COUNT(*) DESC;");
          boolean f = result.next();
          while (f)
@@ -191,7 +191,7 @@ public class DBConnector {
          ResultSet result = statement.executeQuery("SELECT State, City, COUNT(*)\n"
                  + "FROM UFOSightings\n"
                  + "WHERE State = '" + dbState.toLowerCase() + "'\n"
-                 + "GROUP BY City"
+                 + "GROUP BY City\n"
                  + "ORDER BY COUNT(*) DESC;");
          boolean f = result.next();
          while (f)
