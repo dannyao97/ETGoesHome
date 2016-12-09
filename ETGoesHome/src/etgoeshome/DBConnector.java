@@ -316,13 +316,62 @@ public class DBConnector {
          ResultSet result = statement.executeQuery("SELECT L1.City, COUNT(S1.Id)\n"
                  + "FROM Shootings S1, UFOSightings S2, Location L1\n"
                  + "WHERE L1.City = S1.City AND L1.State = S1.State AND\n"
-                 + "L1.City = S2.City AND L1.State = S2.State AND S1.Mental = 'F'"
+                 + "L1.City = S2.City AND L1.State = S2.State AND S1.Mental = 'F'\n"
                  + "GROUP BY L1.City;");
          boolean f = result.next();
          while (f)
          {
             String s1 = result.getString(1); //State
             String s2 = result.getString(2); //Number of sightings/sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
+   public DefaultTableModel sightings_MenAndWomenShootingsPerState() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "MenShot", "WomenShot"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery("SELECT S1.State, S2.Id, S3.Id\n"
+                 + "FROM UFOSightings S1, (SELECT COUNT(S.Id), S.State\n"
+                 + "                       FROM Shootings S\n"
+                 + "                       WHERE S.Gender = 'M'\n"
+                 + "                       GROUP BY S.State) S2,\n"
+                 + "(SELECT COUNT(S.Id) AS Id, S.State\n"
+                 + " FROM Shootings S\n"
+                 + " WHERE S.Gender = 'F'\n"
+                 + " GROUP BY S.State) S3"
+                 + "WHERE S1.State = S2.State AND S1.State = S3.State\n"
+                 + "GROUP BY S1.State;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //Number of MenShot
+            String s3 = result.getString(3); //Number of WomenShot
 
             Object[] objs =
             {
