@@ -26,7 +26,7 @@ ADD TAB Shooting table stats
     Shootings per Race
     Shootings per Age group
     Shootings per Weapon
-    Number of shootings with and without a BodyCamera
+DONE(shootingsByCamera())    Number of shootings with and without a BodyCamera
 
 
 

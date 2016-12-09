@@ -323,6 +323,51 @@ public class DBConnector {
       }
    }
    
+   public DefaultTableModel shootingsByCamera() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "With_Body_Camera", "Without_Body_Camera"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                   "SELECT w.T, n.F\n"
+                 + "FROM (SELECT COUNT(*) AS T\n"
+                 + "      FROM Shootings\n"
+                 + "      WHERE BodyCamera = 'T') w,\n"
+                 + "     (SELECT COUNT(*) AS F\n"
+                 + "      FROM Shootings\n"
+                 + "      WHERE BodyCamera = 'F') n;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Shape
+            String s2 = result.getString(2); //Number of sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+   
    public DefaultTableModel sightingsByShape() {
 
       /* Column headers */
