@@ -43,6 +43,12 @@ public class Logic extends Observable {
          case 3:
             tableData = db.shootingsSightingsPerCity(state);
             break;
+         case 4:
+            tableData = db.sightings_MenAndWomenShootingsPerState();
+            break;
+         case 5:
+            tableData = db.sightings_HealthyShootersPerCity(state);
+            break;
          default:
             System.err.println("Unrecognized State Query\n");
       }
@@ -58,15 +64,18 @@ public class Logic extends Observable {
             tableData = db.sightingsByShape();
             break;
          case 1:
-            tableData = db.longestSighting();
+            tableData = db.sightingsByYear();
             break;
          case 2:
-            tableData = db.mostSightingsByYear();
+            tableData = db.longestSighting();
             break;
          case 3:
-            tableData = db.mostSightingsByCity();
+            tableData = db.mostSightingsByYear();
             break;
          case 4:
+            tableData = db.mostSightingsByCity();
+            break;
+         case 5:
             tableData = db.sawBrightLight();
             break;
          default:

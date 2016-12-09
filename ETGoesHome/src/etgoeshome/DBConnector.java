@@ -75,7 +75,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -118,7 +118,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+            //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
 
             f = result.next();
          }
@@ -169,7 +169,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
+            //System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
 
             f = result.next();
          }
@@ -212,7 +212,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+            //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
 
             f = result.next();
          }
@@ -253,7 +253,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -294,7 +294,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -307,7 +307,7 @@ public class DBConnector {
       return table;
    }
 
-   public DefaultTableModel sightings_HealthyShootersPerCity() {
+   public DefaultTableModel sightings_HealthyShootersPerCity(String dbState) {
 
       /* Column headers */
       String colNames[] =
@@ -321,8 +321,8 @@ public class DBConnector {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery("SELECT L1.City, COUNT(S1.Id)\n"
                  + "FROM Shootings S1, UFOSightings S2, Location L1\n"
-                 + "WHERE L1.City = S1.City AND L1.State = S1.State AND\n"
-                 + "L1.City = S2.City AND L1.State = S2.State AND S1.Mental = 'F'\n"
+                 + "WHERE L1.City = S1.City AND L1.State = '" + dbState + "' AND\n"
+                 + "L1.City = S2.City AND L1.State = '" + dbState + "' AND S1.Mental = 'F'\n"
                  + "GROUP BY L1.City;");
          boolean f = result.next();
          while (f)
@@ -336,7 +336,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -362,14 +362,15 @@ public class DBConnector {
       {
          Statement statement = conn.createStatement();
          ResultSet result = statement.executeQuery("SELECT S1.State, S2.Id, S3.Id\n"
-                 + "FROM UFOSightings S1, (SELECT COUNT(S.Id), S.State\n"
-                 + "                       FROM Shootings S\n"
-                 + "                       WHERE S.Gender = 'M'\n"
-                 + "                       GROUP BY S.State) S2,\n"
-                 + "(SELECT COUNT(S.Id) AS Id, S.State\n"
-                 + " FROM Shootings S\n"
-                 + " WHERE S.Gender = 'F'\n"
-                 + " GROUP BY S.State) S3"
+                 + "FROM UFOSightings S1, \n"
+                 + "     (SELECT COUNT(S.Id) AS Id, S.State\n"
+                 + "      FROM Shootings S\n"
+                 + "      WHERE S.Gender = 'M'\n"
+                 + "      GROUP BY S.State) S2,\n"
+                 + "     (SELECT COUNT(S.Id) AS Id, S.State\n"
+                 + "      FROM Shootings S\n"
+                 + "      WHERE S.Gender = 'F'\n"
+                 + "      GROUP BY S.State) S3\n"
                  + "WHERE S1.State = S2.State AND S1.State = S3.State\n"
                  + "GROUP BY S1.State;");
          boolean f = result.next();
@@ -381,11 +382,11 @@ public class DBConnector {
 
             Object[] objs =
             {
-               s1, s2
+               s1, s2, s3
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
 
             f = result.next();
          }
@@ -466,7 +467,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -507,7 +508,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -549,7 +550,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -591,7 +592,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -636,7 +637,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -678,7 +679,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -723,7 +724,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
+            //System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
 
             f = result.next();
          }
@@ -771,7 +772,48 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2);
+            //System.out.println(s1 + "   :   " + s2);
+
+            f = result.next();
+         }
+
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+
+   public DefaultTableModel sightingsByYear() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "Year", "UFO_Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                 "SELECT YEAR(Occurence), COUNT(*) AS NumSightings\n"
+                 + "FROM UFOSightings\n"
+                 + "GROUP BY YEAR(Occurence);");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //Year
+            String s2 = result.getString(2); //Number of UFO sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            //System.out.println(s1 + "   :   " + s2);
 
             f = result.next();
          }
@@ -821,7 +863,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+            //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
 
             f = result.next();
          }
@@ -863,7 +905,7 @@ public class DBConnector {
             };
             table.addRow(objs);
 
-            System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+            //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
 
             f = result.next();
          }

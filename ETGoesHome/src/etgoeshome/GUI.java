@@ -186,6 +186,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblUser = new javax.swing.JLabel();
       lblPw = new javax.swing.JLabel();
       lblStatus = new javax.swing.JLabel();
+      lblBy = new javax.swing.JLabel();
 
       dialogMessage.setTitle("Message");
       dialogMessage.setMinimumSize(new java.awt.Dimension(420, 230));
@@ -247,11 +248,19 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
       tabPane.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+      statesTab.addFocusListener(new java.awt.event.FocusAdapter() {
+         public void focusGained(java.awt.event.FocusEvent evt) {
+            statesTabFocusGained(evt);
+         }
+      });
+
+      boxStates.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       boxStates.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" }));
 
       tab1LabelState.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       tab1LabelState.setText("Select a State:");
 
+      btnGetData.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       btnGetData.setText("Get Data");
       btnGetData.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,16 +281,17 @@ public class GUI extends javax.swing.JFrame implements Observer {
       jScrollPane1.setViewportView(tabStatesTable);
 
       lblAnalyzeStates.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-      lblAnalyzeStates.setText("Analyze States");
+      lblAnalyzeStates.setText("Analyze UFOs and Shootings");
 
-      boxStateQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Cities", "Shootings Per City", "UFO Sightings Per City", "Shootings and Sightings Per City" }));
+      boxStateQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Cities", "Shootings per City", "UFO Sightings per City", "Sightings and Shootings per City", "Sightings and Shootings by Gender per State", "Sightings and Shootings without Mental per City" }));
       boxStateQuerySelect.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
             boxStateQuerySelectActionPerformed(evt);
          }
       });
 
-      lblStateQuery.setText("Select a Query");
+      lblStateQuery.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblStateQuery.setText("Select a Query:");
 
       javax.swing.GroupLayout statesTabLayout = new javax.swing.GroupLayout(statesTab);
       statesTab.setLayout(statesTabLayout);
@@ -291,18 +301,21 @@ public class GUI extends javax.swing.JFrame implements Observer {
             .addContainerGap()
             .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addGroup(statesTabLayout.createSequentialGroup()
-                  .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addGap(29, 29, 29)
-                  .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statesTabLayout.createSequentialGroup()
-                        .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                     .addComponent(btnGetData, javax.swing.GroupLayout.Alignment.TRAILING)
-                     .addComponent(boxStateQuerySelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addComponent(lblStateQuery, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-               .addComponent(lblAnalyzeStates))
-            .addContainerGap(87, Short.MAX_VALUE))
+                  .addComponent(lblAnalyzeStates)
+                  .addGap(0, 403, Short.MAX_VALUE))
+               .addGroup(statesTabLayout.createSequentialGroup()
+                  .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                  .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addComponent(lblStateQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                     .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statesTabLayout.createSequentialGroup()
+                           .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                           .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnGetData, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(boxStateQuerySelect, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+            .addContainerGap())
       );
       statesTabLayout.setVerticalGroup(
          statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,18 +328,19 @@ public class GUI extends javax.swing.JFrame implements Observer {
                   .addGroup(statesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                      .addComponent(tab1LabelState, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addComponent(boxStates, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addGap(40, 40, 40)
+                  .addGap(13, 13, 13)
                   .addComponent(lblStateQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                   .addComponent(boxStateQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addGap(38, 38, 38)
+                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                   .addComponent(btnGetData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(76, Short.MAX_VALUE))
       );
 
-      tabPane.addTab("Analyze States", statesTab);
+      tabPane.addTab("Analyze UFO & Shootings", statesTab);
 
+      btnGetSightingData.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       btnGetSightingData.setText("Get Data");
       btnGetSightingData.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,14 +363,16 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblSightings.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
       lblSightings.setText("UFO Sightings");
 
-      boxSightingQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UFOs by Shape", "Longest Sighting", "Year with most Sightings", "City with most Sightings", "Described a Bright Light" }));
+      boxSightingQuerySelect.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      boxSightingQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UFOs by Shape", "UFOs by Year", "Longest Sighting", "Year with most Sightings", "City with most Sightings", "Described a Bright Light" }));
       boxSightingQuerySelect.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
             boxSightingQuerySelectActionPerformed(evt);
          }
       });
 
-      lblSightingQuery.setText("Select a Query");
+      lblSightingQuery.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblSightingQuery.setText("Select a Query:");
 
       javax.swing.GroupLayout sightingsTabLayout = new javax.swing.GroupLayout(sightingsTab);
       sightingsTab.setLayout(sightingsTabLayout);
@@ -366,18 +382,17 @@ public class GUI extends javax.swing.JFrame implements Observer {
             .addContainerGap()
             .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addGroup(sightingsTabLayout.createSequentialGroup()
-                  .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(lblSightings)
+                  .addContainerGap(528, Short.MAX_VALUE))
+               .addGroup(sightingsTabLayout.createSequentialGroup()
+                  .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                  .addGap(18, 18, 18)
                   .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addGroup(sightingsTabLayout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(btnGetSightingData))
-                     .addGroup(sightingsTabLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                           .addComponent(boxSightingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                           .addComponent(lblSightingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-               .addComponent(lblSightings))
-            .addContainerGap(87, Short.MAX_VALUE))
+                     .addGroup(sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnGetSightingData)
+                        .addComponent(boxSightingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                     .addComponent(lblSightingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGap(36, 36, 36))))
       );
       sightingsTabLayout.setVerticalGroup(
          sightingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,7 +405,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
                   .addComponent(lblSightingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                   .addComponent(boxSightingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addGap(108, 108, 108)
+                  .addGap(18, 18, 18)
                   .addComponent(btnGetSightingData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(76, Short.MAX_VALUE))
@@ -398,6 +413,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
 
       tabPane.addTab("UFO Sightings", sightingsTab);
 
+      btnGetShootingData.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       btnGetShootingData.setText("Get Data");
       btnGetShootingData.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -420,6 +436,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblShootings.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
       lblShootings.setText("Police Shootings");
 
+      boxShootingQuerySelect.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       boxShootingQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Shootings by Race", "Shootings by Gender", "Shootings by Day of Week", "Shootings of Armed Victims", "Shootings and Body Cameras" }));
       boxShootingQuerySelect.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,7 +444,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
          }
       });
 
-      lblShootingQuery.setText("Select a Query");
+      lblShootingQuery.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblShootingQuery.setText("Select a Query:");
 
       javax.swing.GroupLayout shootingsTabLayout = new javax.swing.GroupLayout(shootingsTab);
       shootingsTab.setLayout(shootingsTabLayout);
@@ -437,18 +455,17 @@ public class GUI extends javax.swing.JFrame implements Observer {
             .addContainerGap()
             .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addGroup(shootingsTabLayout.createSequentialGroup()
-                  .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addComponent(lblShootings)
+                  .addContainerGap(511, Short.MAX_VALUE))
+               .addGroup(shootingsTabLayout.createSequentialGroup()
+                  .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                  .addGap(18, 18, 18)
                   .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addGroup(shootingsTabLayout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(btnGetShootingData))
-                     .addGroup(shootingsTabLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                           .addComponent(boxShootingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                           .addComponent(lblShootingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-               .addComponent(lblShootings))
-            .addContainerGap(87, Short.MAX_VALUE))
+                     .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnGetShootingData)
+                        .addComponent(boxShootingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                     .addComponent(lblShootingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGap(25, 25, 25))))
       );
       shootingsTabLayout.setVerticalGroup(
          shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,7 +478,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
                   .addComponent(lblShootingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                   .addComponent(boxShootingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addGap(108, 108, 108)
+                  .addGap(18, 18, 18)
                   .addComponent(btnGetShootingData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(76, Short.MAX_VALUE))
@@ -521,11 +538,6 @@ public class GUI extends javax.swing.JFrame implements Observer {
       });
 
       txtShootingName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-      txtShootingName.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            erformed(evt);
-         }
-      });
 
       txtShootingDeath.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -890,13 +902,16 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblStatus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       lblStatus.setText("<html>Status: <b>Not Connected</b></html>");
 
+      lblBy.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblBy.setText("By: Alex Bartlett, Justin Kehl, Daniel Yao");
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
             .addGap(22, 22, 22)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                .addGroup(layout.createSequentialGroup()
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                      .addGroup(layout.createSequentialGroup()
@@ -910,9 +925,12 @@ public class GUI extends javax.swing.JFrame implements Observer {
                   .addGap(18, 18, 18)
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                      .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblBy))))
                .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(23, Short.MAX_VALUE))
+            .addContainerGap(25, Short.MAX_VALUE))
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -921,7 +939,8 @@ public class GUI extends javax.swing.JFrame implements Observer {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addComponent(lblUser)
-               .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+               .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(lblBy))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1019,10 +1038,6 @@ public class GUI extends javax.swing.JFrame implements Observer {
       dialogMessage.dispose();
    }//GEN-LAST:event_btnOkDialogActionPerformed
 
-   private void erformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_erformed
-      // TODO add your handling code here:
-   }//GEN-LAST:event_erformed
-
     private void boxStateQuerySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxStateQuerySelectActionPerformed
        // TODO add your handling code here:
     }//GEN-LAST:event_boxStateQuerySelectActionPerformed
@@ -1062,6 +1077,10 @@ public class GUI extends javax.swing.JFrame implements Observer {
          logic.addUfo(occur, city, state, shape, duration, descript);
       }
    }//GEN-LAST:event_btnUfoActionPerformed
+
+   private void statesTabFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_statesTabFocusGained
+      // TODO add your handling code here:
+   }//GEN-LAST:event_statesTabFocusGained
 
    /**
     * @param args the command line arguments
@@ -1173,6 +1192,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
    private javax.swing.JScrollPane jScrollPane2;
    private javax.swing.JScrollPane jScrollPane3;
    private javax.swing.JLabel lblAnalyzeStates;
+   private javax.swing.JLabel lblBy;
    private javax.swing.JLabel lblDialogMessage;
    private javax.swing.JLabel lblPw;
    private javax.swing.JLabel lblShooting;
