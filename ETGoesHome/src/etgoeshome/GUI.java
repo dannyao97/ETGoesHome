@@ -126,6 +126,9 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblShootings = new javax.swing.JLabel();
       boxShootingQuerySelect = new javax.swing.JComboBox();
       lblShootingQuery = new javax.swing.JLabel();
+      lblSearchVictim = new javax.swing.JLabel();
+      txtShootingsVictim = new javax.swing.JTextField();
+      btnShootingsSearch = new javax.swing.JButton();
       addShooting = new javax.swing.JPanel();
       lblShooting = new javax.swing.JLabel();
       lblShootingName = new javax.swing.JLabel();
@@ -364,7 +367,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblSightings.setText("UFO Sightings");
 
       boxSightingQuerySelect.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-      boxSightingQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UFOs by Shape", "UFOs by Year", "Longest Sighting", "Year with most Sightings", "City with most Sightings", "Described a Bright Light" }));
+      boxSightingQuerySelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "UFOs by Shape", "UFOs by Year", "UFOs by State", "Longest Sighting", "Year with most Sightings", "City with most Sightings", "Described a Bright Light" }));
       boxSightingQuerySelect.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
             boxSightingQuerySelectActionPerformed(evt);
@@ -447,6 +450,19 @@ public class GUI extends javax.swing.JFrame implements Observer {
       lblShootingQuery.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
       lblShootingQuery.setText("Select a Query:");
 
+      lblSearchVictim.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      lblSearchVictim.setText("Search by Victim Name:");
+
+      txtShootingsVictim.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+      btnShootingsSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+      btnShootingsSearch.setText("Search");
+      btnShootingsSearch.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnShootingsSearchActionPerformed(evt);
+         }
+      });
+
       javax.swing.GroupLayout shootingsTabLayout = new javax.swing.GroupLayout(shootingsTab);
       shootingsTab.setLayout(shootingsTabLayout);
       shootingsTabLayout.setHorizontalGroup(
@@ -460,11 +476,14 @@ public class GUI extends javax.swing.JFrame implements Observer {
                .addGroup(shootingsTabLayout.createSequentialGroup()
                   .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                   .addGap(18, 18, 18)
-                  .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnGetShootingData)
-                        .addComponent(boxShootingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                     .addComponent(lblShootingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                     .addGroup(shootingsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnGetShootingData, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(boxShootingQuerySelect, 0, 218, Short.MAX_VALUE)
+                        .addComponent(lblShootingQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSearchVictim)
+                        .addComponent(txtShootingsVictim))
+                     .addComponent(btnShootingsSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                   .addGap(25, 25, 25))))
       );
       shootingsTabLayout.setVerticalGroup(
@@ -479,7 +498,13 @@ public class GUI extends javax.swing.JFrame implements Observer {
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                   .addComponent(boxShootingQuerySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addGap(18, 18, 18)
-                  .addComponent(btnGetShootingData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                  .addComponent(btnGetShootingData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(90, 90, 90)
+                  .addComponent(lblSearchVictim)
+                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                  .addComponent(txtShootingsVictim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(18, 18, 18)
+                  .addComponent(btnShootingsSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(76, Short.MAX_VALUE))
       );
@@ -1082,6 +1107,10 @@ public class GUI extends javax.swing.JFrame implements Observer {
       // TODO add your handling code here:
    }//GEN-LAST:event_statesTabFocusGained
 
+   private void btnShootingsSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShootingsSearchActionPerformed
+      logic.searchShootingVictim(txtShootingsVictim.getText());
+   }//GEN-LAST:event_btnShootingsSearchActionPerformed
+
    /**
     * @param args the command line arguments
     */
@@ -1185,6 +1214,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
    private javax.swing.JButton btnGetSightingData;
    private javax.swing.JButton btnLogin;
    private javax.swing.JButton btnOkDialog;
+   private javax.swing.JButton btnShootingsSearch;
    private javax.swing.JButton btnUfo;
    private javax.swing.JDialog dialogMessage;
    private javax.swing.JPanel jPanel1;
@@ -1195,6 +1225,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
    private javax.swing.JLabel lblBy;
    private javax.swing.JLabel lblDialogMessage;
    private javax.swing.JLabel lblPw;
+   private javax.swing.JLabel lblSearchVictim;
    private javax.swing.JLabel lblShooting;
    private javax.swing.JLabel lblShootingAge;
    private javax.swing.JLabel lblShootingCamera;
@@ -1248,6 +1279,7 @@ public class GUI extends javax.swing.JFrame implements Observer {
    private javax.swing.JTextField txtShootingDeath;
    private javax.swing.JTextField txtShootingName;
    private javax.swing.JTextField txtShootingWeapon;
+   private javax.swing.JTextField txtShootingsVictim;
    private javax.swing.JTextField txtUfoCity;
    private javax.swing.JTextArea txtUfoDescript;
    private javax.swing.JTextField txtUfoShape;

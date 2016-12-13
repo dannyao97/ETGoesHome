@@ -67,15 +67,18 @@ public class Logic extends Observable {
             tableData = db.sightingsByYear();
             break;
          case 2:
-            tableData = db.longestSighting();
+            tableData = db.sightingsByState();
             break;
          case 3:
-            tableData = db.mostSightingsByYear();
+            tableData = db.longestSighting();
             break;
          case 4:
-            tableData = db.mostSightingsByCity();
+            tableData = db.mostSightingsByYear();
             break;
          case 5:
+            tableData = db.mostSightingsByCity();
+            break;
+         case 6:
             tableData = db.sawBrightLight();
             break;
          default:
@@ -108,6 +111,11 @@ public class Logic extends Observable {
             System.err.println("Unrecognized Shooting Query\n");
       }
 
+      notifyGUI(ENotify.AN_SHOOTINGS);
+   }
+
+   public void searchShootingVictim(String victim) {
+      tableData = db.searchVictim(victim);
       notifyGUI(ENotify.AN_SHOOTINGS);
    }
 

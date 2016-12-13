@@ -76,7 +76,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -119,7 +118,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
-
             f = result.next();
          }
 
@@ -170,7 +168,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
-
             f = result.next();
          }
 
@@ -213,7 +210,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
-
             f = result.next();
          }
 
@@ -254,7 +250,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -295,7 +290,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -337,7 +331,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -387,7 +380,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
-
             f = result.next();
          }
 
@@ -468,7 +460,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -509,7 +500,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -551,7 +541,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -593,7 +582,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -638,7 +626,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -680,7 +667,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -725,7 +711,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2 + "   :   " + s3 + "   :   " + s4);
-
             f = result.next();
          }
 
@@ -773,7 +758,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
-
             f = result.next();
          }
 
@@ -814,7 +798,46 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2);
+            f = result.next();
+         }
 
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+
+   public DefaultTableModel sightingsByState() {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "State", "UFO_Sightings"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                 "SELECT State, COUNT(*) AS NumSightings\n"
+                 + "FROM UFOSightings\n"
+                 + "GROUP BY State;");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1); //State
+            String s2 = result.getString(2); //Number of UFO sightings
+
+            Object[] objs =
+            {
+               s1, s2
+            };
+            table.addRow(objs);
+
+            //System.out.println(s1 + "   :   " + s2);
             f = result.next();
          }
 
@@ -864,7 +887,6 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
-
             f = result.next();
          }
 
@@ -906,7 +928,52 @@ public class DBConnector {
             table.addRow(objs);
 
             //System.out.println(s1 + "   :   " + s2 + "   :   " + s3);
+            f = result.next();
+         }
 
+      } catch (Exception ee)
+      {
+         System.out.println(ee);
+      }
+
+      return table;
+   }
+
+   public DefaultTableModel searchVictim(String victim) {
+
+      /* Column headers */
+      String colNames[] =
+      {
+         "Name", "Day", "Age", "Gender", "Weapon", "City", "State"
+      };
+      DefaultTableModel table = new DefaultTableModel(colNames, 0);
+
+      try
+      {
+         Statement statement = conn.createStatement();
+         ResultSet result = statement.executeQuery(
+                 "SELECT Name, Day, Age, Gender, Weapon, City, State\n"
+                 + "FROM Shootings\n"
+                 + "WHERE Name LIKE '%" + victim + "%'"
+                 + "ORDER BY Name");
+         boolean f = result.next();
+         while (f)
+         {
+            String s1 = result.getString(1);
+            String s2 = result.getString(2);
+            String s3 = result.getString(3);
+            String s4 = result.getString(4);
+            String s5 = result.getString(5);
+            String s6 = result.getString(6);
+            String s7 = result.getString(7);
+
+            Object[] objs =
+            {
+               s1, s2, s3, s4, s5, s6, s7
+            };
+            table.addRow(objs);
+
+            //System.out.println(s1 + "   :   " + s2);
             f = result.next();
          }
 
